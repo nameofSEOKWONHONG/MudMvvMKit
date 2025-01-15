@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MudComposite", "src\MudComposite\MudComposite.csproj", "{BE0C0D2F-D3EE-45AD-9177-A20540152EC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MudCompositeApp", "src\MudCompositeApp\MudCompositeApp.csproj", "{B2C75E9D-1B97-472D-AA16-A048542F8EC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE0C0D2F-D3EE-45AD-9177-A20540152EC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE0C0D2F-D3EE-45AD-9177-A20540152EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE0C0D2F-D3EE-45AD-9177-A20540152EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0C0D2F-D3EE-45AD-9177-A20540152EC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C75E9D-1B97-472D-AA16-A048542F8EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C75E9D-1B97-472D-AA16-A048542F8EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C75E9D-1B97-472D-AA16-A048542F8EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C75E9D-1B97-472D-AA16-A048542F8EC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

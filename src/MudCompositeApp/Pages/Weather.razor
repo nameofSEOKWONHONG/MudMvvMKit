@@ -1,0 +1,64 @@
+﻿@page "/weather"
+@using MudBlazor
+@using MudComposite
+@using MudCompositeApp.Composites
+@inject HttpClient Http
+
+<PageTitle>Weather</PageTitle>
+
+<h1>Weather</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<MudDataGrid T="WeatherForecast"
+             EditMode="DataGridEditMode.Form"
+             Dense="true"
+             ServerData="ViewComposite.ServerReload"
+             Filterable="false"
+             SortMode="SortMode.None"
+             RowStyleFunc="ViewComposite.RowStyleFunc"
+             RowClick="ViewComposite.DataGridRowClick"
+             SelectedItem="ViewComposite.SelectedItem"
+             @ref="_dataGrid">
+    <Columns>
+        <PropertyColumn Property="m => m.Date"/>
+        <PropertyColumn Property="m => m.Summary"/>
+        <PropertyColumn Property="m => m.TemperatureC"/>
+        <PropertyColumn Property="m => m.TemperatureF"/>
+        <TemplateColumn>
+            <CellTemplate>
+                <MudButton Variant="Variant.Filled" OnClick="@(() => ViewComposite.Remove(context.Item))">delete</MudButton>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="WeatherForecast" pa />
+    </PagerContent>
+</MudDataGrid>
+
+@inject IWeatherService WeatherService;
+@inject IWeatherListViewComposite ViewComposite;
+@code {
+    MudDataGrid<WeatherForecast> _dataGrid;
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            ViewComposite.SetUp(_dataGrid);
+            ViewComposite.OnServerReload = async (state) =>
+            {
+                var result = await WeatherService.GetList(ViewComposite.SearchModel, state.Page, state.PageSize);
+                return new GridData<WeatherForecast>()
+                {
+                    TotalItems = result.TotalCount,
+                    Items = result.Datum
+                };
+            };
+            ViewComposite.OnRemove = async (item) =>
+            {
+                await Task.Delay(1000);
+                return new Results() {Succeeded = true, Messages = ["Success"]};
+            };
+        }
+    }
+}

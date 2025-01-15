@@ -1,0 +1,16 @@
+﻿@using MudBlazor
+@using Color = MudBlazor.Color
+@using Size = MudBlazor.Size
+
+<MudDialog>
+    <DialogContent>
+        <MudStack Style="height: 200px; width: 200px;" Justify="Justify.Center" AlignItems="AlignItems.Center">
+            <MudProgressCircular Indeterminate="true" Size="Size.Medium" Color="Color.Success"/>
+        </MudStack>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+}
