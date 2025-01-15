@@ -1,8 +1,9 @@
 ﻿@page "/weather"
-@using MudBlazor
+
 @using MudComposite
 @using MudCompositeApp.Composites
-@inject HttpClient Http
+
+@inherits MudListViewComponent<WeatherForecast, SearchModel, IWeatherListViewComposite>
 
 <PageTitle>Weather</PageTitle>
 
@@ -37,7 +38,6 @@
 </MudDataGrid>
 
 @inject IWeatherService WeatherService;
-@inject IWeatherListViewComposite ViewComposite;
 @code {
     MudDataGrid<WeatherForecast> _dataGrid;
     protected override void OnAfterRender(bool firstRender)

@@ -4,12 +4,10 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace MudComposite;
 
-public class MudListViewComposite<TModel, TSearchModel> : IMudListViewComposite<TModel, TSearchModel>
+public abstract class MudListViewComposite<TModel, TSearchModel> : MudViewCompositeBase, IMudListViewComposite<TModel, TSearchModel>
     where TModel : class, new()
     where TSearchModel : class, new()
-{
-    private const int Delay = 500;
-    
+{   
     #region [public variables]
 
     public TModel SelectedItem { get; set; } = new();
@@ -35,18 +33,14 @@ public class MudListViewComposite<TModel, TSearchModel> : IMudListViewComposite<
     #region [protected variables]
 
     protected MudDataGrid<TModel> DataGrid { get; set; }
-    protected ISnackbar SnackBar;
-    protected IDialogService DialogService;
+
     
     #endregion
     
     public MudListViewComposite(IDialogService dialogService,
-        ISnackbar snackbar)
+        ISnackbar snackbar) : base(dialogService, snackbar)
     {
         this.SearchModel = new TSearchModel();
-        
-        this.DialogService = dialogService;
-        this.SnackBar = snackbar;
     }
     
     /// <summary>
@@ -173,3 +167,4 @@ public class MudListViewComposite<TModel, TSearchModel> : IMudListViewComposite<
 
     #endregion
 }
+

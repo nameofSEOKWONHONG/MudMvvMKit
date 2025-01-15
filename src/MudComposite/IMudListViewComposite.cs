@@ -20,3 +20,6 @@ public interface IMudListViewComposite<TModel, TSearchModel>
     Task SearchClear();
     void SetUp(MudDataGrid<TModel> dataGrid);
 }
+
+
+
