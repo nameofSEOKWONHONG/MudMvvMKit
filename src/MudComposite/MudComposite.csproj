@@ -10,5 +10,8 @@
       <PackageReference Include="eXtensionSharp" Version="1.0.1.12" />
       <PackageReference Include="MudBlazor" Version="7.15.0" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Composites\" />
+    </ItemGroup>
 
 </Project>

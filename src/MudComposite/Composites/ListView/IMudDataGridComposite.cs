@@ -1,16 +1,26 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 
-namespace MudComposite;
+namespace MudComposite.Composites.ListView;
 
-public interface IMudListViewComposite<TModel, TSearchModel>
+public interface IMudDataGridComposite<TModel, TSearchModel>
 {
-    Func<GridState<TModel>, Task<GridData<TModel>>> OnServerReload { get; set; }
-    Func<TModel, Task<Results>> OnRemove { get; set; }
-    
+    #region [property]
+
     TModel SelectedItem { get; set; }
     List<TModel> SelectedItems { get; set; }
-    TSearchModel SearchModel { get; set; }
+    TSearchModel SearchModel { get; set; }    
+
+    #endregion
+
+    #region [event]
+
+    Func<GridState<TModel>, Task<GridData<TModel>>> OnServerReload { get; set; }
+    Func<TModel, Task<Results>> OnRemove { get; set; }    
+
+    #endregion
+
+    #region [method]
 
     Task<GridData<TModel>> ServerReload(GridState<TModel> state);
     Task Remove(TModel item);
@@ -19,7 +29,6 @@ public interface IMudListViewComposite<TModel, TSearchModel>
     string RowStyleFunc(TModel item, int id);
     Task SearchClear();
     void SetUp(MudDataGrid<TModel> dataGrid);
+
+    #endregion
 }
-
-
-

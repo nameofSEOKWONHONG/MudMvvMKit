@@ -3,14 +3,14 @@
 @using MudComposite
 @using MudCompositeApp.Composites
 
-@inherits MudListViewComponent<WeatherForecast, SearchModel, IWeatherListViewComposite>
+@inherits MudComposite.Components.MudListViewComponent<WeatherForecast, SearchModel, IWeatherListViewComposite>
 
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
-
+ 
 <MudDataGrid T="WeatherForecast"
              EditMode="DataGridEditMode.Form"
              Dense="true"
@@ -19,7 +19,6 @@
              SortMode="SortMode.None"
              RowStyleFunc="ViewComposite.RowStyleFunc"
              RowClick="ViewComposite.DataGridRowClick"
-             SelectedItem="ViewComposite.SelectedItem"
              @ref="_dataGrid">
     <Columns>
         <PropertyColumn Property="m => m.Date"/>
@@ -37,10 +36,14 @@
     </PagerContent>
 </MudDataGrid>
 
+<MudButton OnClick="Cancel">Go BACK</MudButton>
+
 @inject IWeatherService WeatherService;
+@inject NavigationManager NavManager;
+@inject IJSRuntime JsRuntime;
 @code {
     MudDataGrid<WeatherForecast> _dataGrid;
-    protected override void OnAfterRender(bool firstRender)
+    protected override void OnViewAfterRender(bool firstRender)
     {
         if (firstRender)
         {

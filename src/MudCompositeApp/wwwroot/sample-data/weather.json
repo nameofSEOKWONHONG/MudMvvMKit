@@ -1,77 +1,302 @@
 ﻿[
   {
+    "id": 1,
     "date": "2022-01-06",
     "temperatureC": 1,
     "summary": "Freezing"
   },
   {
+    "id": 2,
     "date": "2022-01-07",
     "temperatureC": 14,
     "summary": "Bracing"
   },
   {
+    "id": 3,
     "date": "2022-01-08",
     "temperatureC": -13,
     "summary": "Freezing"
   },
   {
+    "id": 4,
     "date": "2022-01-09",
     "temperatureC": -16,
     "summary": "Balmy"
   },
   {
+    "id": 5,
     "date": "2022-01-10",
     "temperatureC": -2,
     "summary": "Chilly"
   },
   {
+    "id": 6,
     "date": "2022-01-11",
     "temperatureC": 1,
     "summary": "Freezing"
   },
   {
+    "id": 7,
     "date": "2022-01-12",
     "temperatureC": 14,
     "summary": "Bracing"
   },
   {
+    "id": 8,
     "date": "2022-01-13",
     "temperatureC": -13,
     "summary": "Freezing"
   },
   {
+    "id": 9,
     "date": "2022-01-14",
     "temperatureC": -16,
     "summary": "Balmy"
   },
   {
+    "id": 10,
     "date": "2022-01-15",
     "temperatureC": -2,
     "summary": "Chilly"
   },
   {
+    "id": 11,
     "date": "2022-01-16",
     "temperatureC": 1,
     "summary": "Freezing"
   },
   {
+    "id": 12,
     "date": "2022-01-17",
     "temperatureC": 14,
     "summary": "Bracing"
   },
   {
+    "id": 13,
     "date": "2022-01-18",
     "temperatureC": -13,
     "summary": "Freezing"
   },
   {
+    "id": 14,
     "date": "2022-01-19",
     "temperatureC": -16,
     "summary": "Balmy"
   },
   {
+    "id": 15,
     "date": "2022-01-20",
     "temperatureC": -2,
     "summary": "Chilly"
-  }  
+  },
+  {
+    "id": 16,
+    "date": "2022-01-21",
+    "temperatureC": 1,
+    "summary": "Freezing"
+  },
+  {
+    "id": 17,
+    "date": "2022-01-22",
+    "temperatureC": 14,
+    "summary": "Bracing"
+  },
+  {
+    "id": 18,
+    "date": "2022-01-23",
+    "temperatureC": -13,
+    "summary": "Freezing"
+  },
+  {
+    "id": 19,
+    "date": "2022-01-24",
+    "temperatureC": -16,
+    "summary": "Balmy"
+  },
+  {
+    "id": 20,
+    "date": "2022-01-25",
+    "temperatureC": -2,
+    "summary": "Chilly"
+  },
+  {
+    "id": 21,
+    "date": "2022-01-26",
+    "temperatureC": 1,
+    "summary": "Freezing"
+  },
+  {
+    "id": 22,
+    "date": "2022-01-27",
+    "temperatureC": 14,
+    "summary": "Bracing"
+  },
+  {
+    "id": 23,
+    "date": "2022-01-28",
+    "temperatureC": -13,
+    "summary": "Freezing"
+  },
+  {
+    "id": 24,
+    "date": "2022-01-29",
+    "temperatureC": -16,
+    "summary": "Balmy"
+  },
+  {
+    "id": 25,
+    "date": "2022-01-30",
+    "temperatureC": -2,
+    "summary": "Chilly"
+  },
+  {
+    "id": 26,
+    "date": "2022-01-31",
+    "temperatureC": 1,
+    "summary": "Freezing"
+  },
+  {
+    "id": 27,
+    "date": "2022-02-01",
+    "temperatureC": 14,
+    "summary": "Bracing"
+  },
+  {
+    "id": 28,
+    "date": "2022-02-02",
+    "temperatureC": -13,
+    "summary": "Freezing"
+  },
+  {
+    "id": 29,
+    "date": "2022-02-03",
+    "temperatureC": -16,
+    "summary": "Balmy"
+  },
+  {
+    "id": 30,
+    "date": "2022-02-04",
+    "temperatureC": -2,
+    "summary": "Chilly"
+  },
+  {
+    "id": 31,
+    "date": "2022-02-05",
+    "temperatureC": 1,
+    "summary": "Freezing"
+  },
+  {
+    "id": 32,
+    "date": "2022-02-06",
+    "temperatureC": 14,
+    "summary": "Bracing"
+  },
+  {
+    "id": 33,
+    "date": "2022-02-07",
+    "temperatureC": -13,
+    "summary": "Freezing"
+  },
+  {
+    "id": 34,
+    "date": "2022-02-08",
+    "temperatureC": -16,
+    "summary": "Balmy"
+  },
+  {
+    "id": 35,
+    "date": "2022-02-09",
+    "temperatureC": -2,
+    "summary": "Chilly"
+  },
+  {
+    "id": 36,
+    "date": "2022-02-10",
+    "temperatureC": 1,
+    "summary": "Freezing"
+  },
+  {
+    "id": 37,
+    "date": "2022-02-11",
+    "temperatureC": 14,
+    "summary": "Bracing"
+  },
+  {
+    "id": 38,
+    "date": "2022-02-12",
+    "temperatureC": -13,
+    "summary": "Freezing"
+  },
+  {
+    "id": 39,
+    "date": "2022-02-13",
+    "temperatureC": -16,
+    "summary": "Balmy"
+  },
+  {
+    "id": 40,
+    "date": "2022-02-14",
+    "temperatureC": -2,
+    "summary": "Chilly"
+  },
+  {
+    "id": 41,
+    "date": "2022-02-15",
+    "temperatureC": 1,
+    "summary": "Freezing"
+  },
+  {
+    "id": 42,
+    "date": "2022-02-16",
+    "temperatureC": 14,
+    "summary": "Bracing"
+  },
+  {
+    "id": 43,
+    "date": "2022-02-17",
+    "temperatureC": -13,
+    "summary": "Freezing"
+  },
+  {
+    "id": 44,
+    "date": "2022-02-18",
+    "temperatureC": -16,
+    "summary": "Balmy"
+  },
+  {
+    "id": 45,
+    "date": "2022-02-19",
+    "temperatureC": -2,
+    "summary": "Chilly"
+  },
+  {
+    "id": 46,
+    "date": "2022-02-20",
+    "temperatureC": 1,
+    "summary": "Freezing"
+  },
+  {
+    "id": 47,
+    "date": "2022-02-21",
+    "temperatureC": 14,
+    "summary": "Bracing"
+  },
+  {
+    "id": 48,
+    "date": "2022-02-22",
+    "temperatureC": -13,
+    "summary": "Freezing"
+  },
+  {
+    "id": 49,
+    "date": "2022-02-23",
+    "temperatureC": -16,
+    "summary": "Balmy"
+  },
+  {
+    "id": 50,
+    "date": "2022-02-24",
+    "temperatureC": -2,
+    "summary": "Chilly"
+  }
 ]

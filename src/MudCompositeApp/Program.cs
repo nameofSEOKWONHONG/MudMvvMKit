@@ -9,7 +9,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMudServices();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
-builder.Services.AddScoped<IWeatherListViewComposite, WeatherListViewComposite>();
+builder.Services.AddScoped<IWeatherListViewComposite, WeatherDataGridComposite>();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

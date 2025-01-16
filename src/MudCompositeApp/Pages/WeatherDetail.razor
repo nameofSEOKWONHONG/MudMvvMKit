@@ -1,0 +1,31 @@
+@page "/weather/detail/{id}"
+@using MudComposite
+@using MudCompositeApp.Composites
+@inherits MudComposite.Components.MudDetailViewComponent<WeatherForecast, MudCompositeApp.Composites.IWeatherDetailComposite>
+
+<MudContainer>
+    <MudPaper>
+        <MudText>@this.ViewComposite.RetrievedItem.Id</MudText>
+        <MudNumericField T="int" Label="Temperature" Value="@ViewComposite.RetrievedItem.TemperatureC"/>
+    </MudPaper>
+    <MudButton OnClick="this.ViewComposite.Submit">Summit</MudButton>
+    <MudButton OnClick="this.Cancel">Go Back</MudButton>
+</MudContainer>
+
+@code {
+    [Parameter] public int Id { get; set; }
+    
+    protected override void OnViewInitialized()
+    {
+        this.ViewComposite.Initialize();
+    }
+
+    protected override async Task OnViewAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await this.ViewComposite.Retrieve();
+        }
+    }
+
+}

@@ -1,10 +1,12 @@
-﻿using MudBlazor;
-using eXtensionSharp;
+﻿using eXtensionSharp;
 using Microsoft.AspNetCore.Components.Web;
+using MudBlazor;
+using MudComposite.Base;
+using MudComposite.Components;
 
-namespace MudComposite;
+namespace MudComposite.Composites.ListView;
 
-public abstract class MudListViewComposite<TModel, TSearchModel> : MudViewCompositeBase, IMudListViewComposite<TModel, TSearchModel>
+public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompositeBase, IMudDataGridComposite<TModel, TSearchModel>
     where TModel : class, new()
     where TSearchModel : class, new()
 {   
@@ -37,7 +39,7 @@ public abstract class MudListViewComposite<TModel, TSearchModel> : MudViewCompos
     
     #endregion
     
-    public MudListViewComposite(IDialogService dialogService,
+    public MudDataGridComposite(IDialogService dialogService,
         ISnackbar snackbar) : base(dialogService, snackbar)
     {
         this.SearchModel = new TSearchModel();
@@ -51,6 +53,13 @@ public abstract class MudListViewComposite<TModel, TSearchModel> : MudViewCompos
     {
         DataGrid = dataGrid;
     }
+
+    public void SetUp(MudTable<TModel> table)
+    {
+        Table = table;
+    }
+
+    protected MudTable<TModel> Table;
     
     #region [events]
 
