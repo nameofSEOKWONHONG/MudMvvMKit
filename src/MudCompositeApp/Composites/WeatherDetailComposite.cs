@@ -19,15 +19,15 @@ public class WeatherDetailComposite : MudDetailViewComposite<WeatherForecast>, I
 
     public void Initialize()
     {
-        this.OnRetrieve = async () => await _weatherService.Get(this.RetrievedItem.Id);
+        this.OnRetrieve = async () => await _weatherService.Get(this.RetrieveItem.Id);
         this.OnSubmit = async () =>
         {   
-            if (this.RetrievedItem.Id > 0)
+            if (this.RetrieveItem.Id > 0)
             {
-                return await _weatherService.Modify(this.RetrievedItem);
+                return await _weatherService.Modify(this.RetrieveItem);
             }
 
-            return await _weatherService.Add(this.RetrievedItem);
+            return await _weatherService.Add(this.RetrieveItem);
         };
     }
 }

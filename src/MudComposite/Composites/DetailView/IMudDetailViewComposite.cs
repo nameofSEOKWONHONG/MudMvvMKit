@@ -2,7 +2,7 @@
 
 public interface IMudDetailViewComposite<TRetrieved>
 {
-    TRetrieved RetrievedItem { get; set; }
+    TRetrieved RetrieveItem { get; set; }
     
     #region [event]
 
@@ -10,13 +10,4 @@ public interface IMudDetailViewComposite<TRetrieved>
     Func<Task<Results>> OnRetrieve { get; set; }    
 
     #endregion
-
-    #region [method]
-
-    Task Retrieve();
-    Task Submit();        
-
-    #endregion
-
-
 }

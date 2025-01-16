@@ -1,6 +1,5 @@
 ﻿@page "/weather"
 
-@using MudComposite
 @using MudCompositeApp.Composites
 
 @inherits MudComposite.Components.MudListViewComponent<WeatherForecast, SearchModel, IWeatherListViewComposite>
@@ -14,11 +13,11 @@
 <MudDataGrid T="WeatherForecast"
              EditMode="DataGridEditMode.Form"
              Dense="true"
-             ServerData="ViewComposite.ServerReload"
+             ServerData="Composite.ServerReload"
              Filterable="false"
              SortMode="SortMode.None"
-             RowStyleFunc="ViewComposite.RowStyleFunc"
-             RowClick="ViewComposite.DataGridRowClick"
+             RowStyleFunc="Composite.RowStyleFunc"
+             RowClick="Composite.DataGridRowClick"
              @ref="_dataGrid">
     <Columns>
         <PropertyColumn Property="m => m.Date"/>
@@ -27,7 +26,8 @@
         <PropertyColumn Property="m => m.TemperatureF"/>
         <TemplateColumn>
             <CellTemplate>
-                <MudButton Variant="Variant.Filled" OnClick="@(() => ViewComposite.Remove(context.Item))">delete</MudButton>
+                <MudButton Variant="Variant.Filled" OnClick="@(() => Composite.GoDetail())"></MudButton>
+                <MudButton Variant="Variant.Filled" OnClick="@(() => Composite.Remove(context.Item))">delete</MudButton>
             </CellTemplate>
         </TemplateColumn>
     </Columns>
@@ -38,30 +38,13 @@
 
 <MudButton OnClick="Cancel">Go BACK</MudButton>
 
-@inject IWeatherService WeatherService;
-@inject NavigationManager NavManager;
-@inject IJSRuntime JsRuntime;
 @code {
     MudDataGrid<WeatherForecast> _dataGrid;
     protected override void OnViewAfterRender(bool firstRender)
     {
         if (firstRender)
         {
-            ViewComposite.SetUp(_dataGrid);
-            ViewComposite.OnServerReload = async (state) =>
-            {
-                var result = await WeatherService.GetList(ViewComposite.SearchModel, state.Page, state.PageSize);
-                return new GridData<WeatherForecast>()
-                {
-                    TotalItems = result.TotalCount,
-                    Items = result.Datum
-                };
-            };
-            ViewComposite.OnRemove = async (item) =>
-            {
-                await Task.Delay(1000);
-                return new Results() {Succeeded = true, Messages = ["Success"]};
-            };
+            Composite.SetUp(_dataGrid);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MudCompositeApp.Composites;
 public interface IWeatherService
 {
     Task<PaginatedResult<WeatherForecast>> GetList(SearchModel searchModel, int pageNo = 0, int pageSize = 10);
-    bool Remove(int id);
+    Task<Results<bool>> Remove(int id);
     Task<Results<WeatherForecast>> Get(int id);
     Task<Results<bool>> Modify(WeatherForecast item);
     Task<Results<int>> Add(WeatherForecast item);
@@ -50,11 +50,11 @@ public class WeatherService : IWeatherService
         return await res.Content.ReadFromJsonAsync<Results<int>>();
     }
 
-    public bool Remove(int id)
+    public async Task<Results<bool>> Remove(int id)
     {
         var exists = _forecasts.First(m => m.Id == id);
         _forecasts.Remove(exists);
-        return true;
+        return await Results<bool>.SuccessAsync();
     }
 }
 

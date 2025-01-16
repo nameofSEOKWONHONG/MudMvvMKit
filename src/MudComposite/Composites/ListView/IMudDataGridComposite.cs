@@ -29,6 +29,9 @@ public interface IMudDataGridComposite<TModel, TSearchModel>
     string RowStyleFunc(TModel item, int id);
     Task SearchClear();
     void SetUp(MudDataGrid<TModel> dataGrid);
+    void GoDetail();
+
+    void Initialize();
 
     #endregion
 }

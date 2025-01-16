@@ -8,8 +8,10 @@ namespace MudComposite.ViewComponents;
 
 public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsyncDisposable, IBrowserViewportObserver
 {
-    [Inject] IDialogService DialogService { get; set; }
-    [Inject] IBrowserViewportService BrowserViewportService { get; set; } = null!;
+    [Inject] public IDialogService DialogService { get; set; }
+    [Inject] public IBrowserViewportService BrowserViewportService { get; set; } = null!;
+    [Inject] public NavigationManager NavManager { get; set; } = null!;
+    
     protected Breakpoint ViewBreakpoint;
     protected List<Breakpoint> ViewBreakpoints = new();
     

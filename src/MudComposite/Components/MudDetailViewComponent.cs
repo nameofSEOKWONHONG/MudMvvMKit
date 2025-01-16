@@ -6,16 +6,25 @@ using MudComposite.ViewComponents;
 
 namespace MudComposite.Components;
 
-public abstract class MudDetailViewComponent<TModel, TComposite> : MudViewComponentBase
-    where TComposite : IMudDetailViewComposite<TModel>
+public abstract class MudDetailViewComponent<TParameter, TComposite> : MudViewComponentBase
+    where TComposite : IMudDetailViewComposite<TParameter>
 {
-    [Inject] protected TComposite ViewComposite { get; set; }
+    [Inject] protected TComposite Composite { get; set; }
+    protected TParameter Parameter { get; set; }
 
     protected virtual async Task Summit()
     {
-        if (ViewComposite.OnSubmit.xIsNotEmpty())
+        if (Composite.OnSubmit.xIsNotEmpty())
         {
-            await ViewComposite.OnSubmit();
+            await Composite.OnSubmit();
+        }
+    }
+
+    protected virtual async Task Retrieve()
+    {
+        if (Composite.OnRetrieve.xIsNotEmpty())
+        {
+            await Composite.OnRetrieve();
         }
     }
 }

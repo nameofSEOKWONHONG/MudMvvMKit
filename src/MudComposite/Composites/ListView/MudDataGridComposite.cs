@@ -1,4 +1,5 @@
 ﻿using eXtensionSharp;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using MudComposite.Base;
@@ -38,11 +39,14 @@ public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompos
 
     
     #endregion
-    
+
+    protected NavigationManager NavManager;
     public MudDataGridComposite(IDialogService dialogService,
-        ISnackbar snackbar) : base(dialogService, snackbar)
+        ISnackbar snackbar,
+        NavigationManager navigationManager) : base(dialogService, snackbar)
     {
         this.SearchModel = new TSearchModel();
+        NavManager = navigationManager;
     }
     
     /// <summary>
@@ -52,11 +56,6 @@ public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompos
     public void SetUp(MudDataGrid<TModel> dataGrid)
     {
         DataGrid = dataGrid;
-    }
-
-    public void SetUp(MudTable<TModel> table)
-    {
-        Table = table;
     }
 
     protected MudTable<TModel> Table;
@@ -175,5 +174,15 @@ public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompos
     }    
 
     #endregion
+
+    public virtual void GoDetail()
+    {
+        
+    }
+
+    public virtual void Initialize()
+    {
+        
+    }
 }
 
