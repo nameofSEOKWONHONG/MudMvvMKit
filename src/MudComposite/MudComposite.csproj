@@ -11,9 +11,6 @@
       <PackageReference Include="MudBlazor" Version="7.15.0" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Composites\" />
-    </ItemGroup>
-    <ItemGroup>
       <Content Remove="C:\Users\h2091\.nuget\packages\extensionsharp\1.0.1.12\contentFiles\any\net8.0\README.md" />
       <Content Include="..\..\README.md">
         <Link>README.md</Link>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 
-namespace MudComposite.Composites.ListView;
+namespace MudComposite.ViewComponents.Composites.ListView;
 
 public interface IMudDataGridComposite<TModel, TSearchModel>
 {

@@ -1,4 +1,4 @@
-﻿namespace MudComposite.Composites.DetailView;
+﻿namespace MudComposite.ViewComponents.Composites.DetailView;
 
 public interface IMudDetailViewComposite<TRetrieved>
 {

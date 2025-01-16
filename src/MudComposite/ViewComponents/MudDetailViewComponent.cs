@@ -1,10 +1,9 @@
 ﻿using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using MudComposite.Composites.DetailView;
-using MudComposite.ViewComponents;
+using MudComposite.Base;
+using MudComposite.ViewComponents.Composites.DetailView;
 
-namespace MudComposite.Components;
+namespace MudComposite.ViewComponents;
 
 public abstract class MudDetailViewComponent<TParameter, TComposite> : MudViewComponentBase
     where TComposite : IMudDetailViewComposite<TParameter>

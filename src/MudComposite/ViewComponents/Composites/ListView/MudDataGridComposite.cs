@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using MudComposite.Base;
-using MudComposite.Components;
 
-namespace MudComposite.Composites.ListView;
+namespace MudComposite.ViewComponents.Composites.ListView;
 
 public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompositeBase, IMudDataGridComposite<TModel, TSearchModel>
     where TModel : class, new()

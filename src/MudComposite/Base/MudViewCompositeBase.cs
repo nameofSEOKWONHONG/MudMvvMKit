@@ -1,5 +1,5 @@
 ﻿using MudBlazor;
-using MudComposite.Components;
+using MudComposite.ViewComponents;
 
 namespace MudComposite.Base;
 

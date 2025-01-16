@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using MudComposite.Composites.ListView;
+using MudComposite.ViewComponents.Composites.ListView;
 
 namespace MudCompositeApp.Composites;
 

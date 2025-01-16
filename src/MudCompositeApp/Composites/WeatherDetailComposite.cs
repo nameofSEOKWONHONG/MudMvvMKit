@@ -1,6 +1,6 @@
 using MudBlazor;
 using MudComposite;
-using MudComposite.Composites.DetailView;
+using MudComposite.ViewComponents.Composites.DetailView;
 
 namespace MudCompositeApp.Composites;
 

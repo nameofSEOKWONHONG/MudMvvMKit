@@ -2,7 +2,7 @@
 using MudBlazor;
 using MudComposite.Base;
 
-namespace MudComposite.Composites.DetailView;
+namespace MudComposite.ViewComponents.Composites.DetailView;
 
 public abstract class MudDetailViewComposite<TRetrieveItem> : MudViewCompositeBase, IMudDetailViewComposite<TRetrieveItem>
 {
