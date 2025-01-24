@@ -5,16 +5,28 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+
+        <Copyright>MIT</Copyright>
+        <Product>MudComposite</Product>
+        <Company>seokwon hong</Company>
+        <Version>0.0.1</Version>
+        <FileVersion>0.0.1</FileVersion>
+        <Title>MudComposite</Title>
+        <Description>Basic Screen Functionality Setup Using MudBlazor</Description>
+        <PackageProjectUrl>https://github.com/nameofSEOKWONHONG/MudComposite</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/nameofSEOKWONHONG/MudComposite</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageTags>mudblazor, view, composite</PackageTags>
     </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="eXtensionSharp" Version="1.0.1.12" />
-      <PackageReference Include="MudBlazor" Version="7.15.0" />
+      <PackageReference Include="eXtensionSharp" Version="1.0.2" />
+      <PackageReference Include="MudBlazor" Version="8.0.0" />
     </ItemGroup>
     <ItemGroup>
-      <Content Remove="C:\Users\h2091\.nuget\packages\extensionsharp\1.0.1.12\contentFiles\any\net8.0\README.md" />
-      <Content Include="..\..\README.md">
-        <Link>README.md</Link>
-      </Content>
+      <Content Remove="C:\Users\seokwon\.nuget\packages\extensionsharp\1.0.2\contentFiles\any\net9.0\README.md" />
     </ItemGroup>
-
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 </Project>

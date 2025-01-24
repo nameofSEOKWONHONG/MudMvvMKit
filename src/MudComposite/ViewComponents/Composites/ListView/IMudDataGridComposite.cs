@@ -23,6 +23,7 @@ public interface IMudDataGridComposite<TModel, TSearchModel>
     #region [method]
 
     Task<GridData<TModel>> ServerReload(GridState<TModel> state);
+    Task ReloadServerData();
     Task Remove(TModel item);
     Task SearchKeyUp(KeyboardEventArgs e);
     void DataGridRowClick(DataGridRowClickEventArgs<TModel> obj);

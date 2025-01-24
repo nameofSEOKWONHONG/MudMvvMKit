@@ -86,6 +86,12 @@ public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompos
 
         return result;
     }
+
+    public virtual async Task ReloadServerData()
+    {
+        if(this.DataGrid.xIsEmpty()) return;
+        await this.DataGrid.ReloadServerData();
+    }
     
     /// <summary>
     /// Search event linked to the grid
