@@ -29,6 +29,10 @@ public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompos
     /// Implement Remove event
     /// </summary>
     public Func<TModel, Task<Results>> OnRemove { get; set; }    
+    
+    public Func<TModel, Task<TModel>> OnSaveBefore { get; set; }
+    public Func<TModel, Task<Results>> OnSave { get; set; }
+    public Func<TModel, Task<Results>> OnSaveAfter { get; set; }
 
     #endregion
 
@@ -176,7 +180,30 @@ public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompos
                 this.SnackBar.Add(result.Messages.xJoin(), Severity.Error);
             }
         }
-    }    
+    }
+
+    public virtual async Task Save(TModel item)
+    {
+        if (OnSave.xIsEmpty()) return;
+        if (OnSaveBefore.xIsNotEmpty())
+        {
+            item = await OnSaveBefore(item);
+        }
+
+        var dlg = await ShowProgressDialog();
+        await OnSave(item);
+        await Task.Delay(Delay);
+        dlg.Close();
+
+        if (OnSaveAfter.xIsNotEmpty())
+        {
+            await OnSaveBefore(item);
+        }
+        else
+        {
+            await this.DataGrid.ReloadServerData();    
+        }
+    }
 
     #endregion
 

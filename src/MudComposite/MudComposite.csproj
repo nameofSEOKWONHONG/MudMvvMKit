@@ -21,7 +21,7 @@
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="eXtensionSharp" Version="1.0.2" />
-      <PackageReference Include="MudBlazor" Version="8.0.0" />
+      <PackageReference Include="MudBlazor" Version="8.1.0" />
     </ItemGroup>
     <ItemGroup>
       <Content Remove="C:\Users\seokwon\.nuget\packages\extensionsharp\1.0.2\contentFiles\any\net9.0\README.md" />

@@ -16,8 +16,8 @@ public interface IMudDataGridComposite<TModel, TSearchModel>
     #region [event]
 
     Func<GridState<TModel>, Task<GridData<TModel>>> OnServerReload { get; set; }
-    Func<TModel, Task<Results>> OnRemove { get; set; }    
-
+    Func<TModel, Task<Results>> OnRemove { get; set; }
+    Func<TModel, Task<TModel>> OnSaveBefore { get; set; }
     #endregion
 
     #region [method]
@@ -25,6 +25,7 @@ public interface IMudDataGridComposite<TModel, TSearchModel>
     Task<GridData<TModel>> ServerReload(GridState<TModel> state);
     Task ReloadServerData();
     Task Remove(TModel item);
+    Task Save(TModel item);
     Task SearchKeyUp(KeyboardEventArgs e);
     void DataGridRowClick(DataGridRowClickEventArgs<TModel> obj);
     string RowStyleFunc(TModel item, int id);
