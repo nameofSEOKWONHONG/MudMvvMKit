@@ -4,13 +4,13 @@ using MudComposite.Base;
 
 namespace MudComposite.ViewComponents.Composites.DetailView;
 
-public abstract class MudDetailViewComposite<TRetrieveItem> : MudViewCompositeBase, IMudDetailViewComposite<TRetrieveItem>
+public abstract class MudDetailViewModel<TModel> : MudViewCompositeBase, IMudDetailViewModel<TModel>
 {
-    protected MudDetailViewComposite(IDialogService dialogService, ISnackbar snackbar) : base(dialogService, snackbar)
+    protected MudDetailViewModel(IDialogService dialogService, ISnackbar snackbar) : base(dialogService, snackbar)
     {
     }
 
-    public TRetrieveItem RetrieveItem { get; set; }
+    public TModel SelectedItem { get; set; }
     public Func<Task<Results>> OnSubmit { get; set; }
     public Func<Task<Results>> OnRetrieve { get; set; }
 

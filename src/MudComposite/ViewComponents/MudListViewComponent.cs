@@ -4,10 +4,10 @@ using MudComposite.ViewComponents.Composites.ListView;
 
 namespace MudComposite.ViewComponents;
 
-public abstract class MudListViewComponent<TModel, TSearchModel, TComposite> : MudViewComponentBase
-    where TComposite : IMudDataGridComposite<TModel, TSearchModel>
+public abstract class MudListViewComponent<TModel, TSearchModel, TViewModel> : MudViewComponentBase
+    where TViewModel : IMudDataGridViewModel<TModel, TSearchModel>
 {
-    [Inject] protected TComposite Composite { get; set; }
+    [Inject] protected TViewModel ViewModel { get; set; }
 
     protected virtual void NavigateToUrl(string url)
     {

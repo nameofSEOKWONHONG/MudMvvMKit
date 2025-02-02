@@ -6,7 +6,7 @@ using MudComposite.Base;
 
 namespace MudComposite.ViewComponents.Composites.ListView;
 
-public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompositeBase, IMudDataGridComposite<TModel, TSearchModel>
+public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewCompositeBase, IMudDataGridViewModel<TModel, TSearchModel>
     where TModel : class, new()
     where TSearchModel : class, new()
 {   
@@ -44,7 +44,7 @@ public abstract class MudDataGridComposite<TModel, TSearchModel> : MudViewCompos
     #endregion
 
     protected NavigationManager NavManager;
-    public MudDataGridComposite(IDialogService dialogService,
+    public MudDataGridViewModel(IDialogService dialogService,
         ISnackbar snackbar,
         NavigationManager navigationManager) : base(dialogService, snackbar)
     {

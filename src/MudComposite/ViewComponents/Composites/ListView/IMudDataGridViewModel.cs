@@ -3,7 +3,7 @@ using MudBlazor;
 
 namespace MudComposite.ViewComponents.Composites.ListView;
 
-public interface IMudDataGridComposite<TModel, TSearchModel>
+public interface IMudDataGridViewModel<TModel, TSearchModel>
 {
     #region [property]
 

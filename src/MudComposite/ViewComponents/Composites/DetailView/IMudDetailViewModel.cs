@@ -1,8 +1,8 @@
 ﻿namespace MudComposite.ViewComponents.Composites.DetailView;
 
-public interface IMudDetailViewComposite<TRetrieved>
+public interface IMudDetailViewModel<TModel>
 {
-    TRetrieved RetrieveItem { get; set; }
+    TModel SelectedItem { get; set; }
     
     #region [event]
 
