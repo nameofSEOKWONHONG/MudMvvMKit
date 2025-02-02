@@ -189,6 +189,7 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewCompos
         {
             item = await OnSaveBefore(item);
         }
+        if(item.xIsEmpty()) return;
 
         var dlg = await ShowProgressDialog();
         await OnSave(item);

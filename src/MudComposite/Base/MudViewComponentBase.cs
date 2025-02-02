@@ -37,21 +37,7 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     {
         return Task.CompletedTask;
     }
-
-    protected sealed override void OnAfterRender(bool firstRender)
-    {
-        OnViewAfterRender(firstRender);
-    }
-    protected virtual void OnViewAfterRender(bool firstRender)
-    {
-    }
-
-    protected sealed override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await OnViewAfterRenderAsync(firstRender);
-    }
-    protected virtual Task OnViewAfterRenderAsync(bool firstRender) { return Task.CompletedTask; }
-
+    
     public Task NotifyBrowserViewportChangeAsync(BrowserViewportEventArgs browserViewportEventArgs)
     {
         if (browserViewportEventArgs.IsImmediate)
