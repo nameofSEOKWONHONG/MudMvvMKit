@@ -1,6 +1,8 @@
-﻿namespace MudComposite.ViewComponents.Composites.DetailView;
+﻿using MudComposite.Base;
 
-public interface IMudDetailViewModel<TModel>
+namespace MudComposite.ViewComponents.Composites.DetailView;
+
+public interface IMudDetailViewModel<TModel>: IMudViewModelBase
 {
     TModel SelectedItem { get; set; }
     

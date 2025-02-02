@@ -4,7 +4,7 @@ using MudComposite.Base;
 
 namespace MudComposite.ViewComponents.Composites.DetailView;
 
-public abstract class MudDetailViewModel<TModel> : MudViewCompositeBase, IMudDetailViewModel<TModel>
+public abstract class MudDetailViewModel<TModel> : MudViewModelBase, IMudDetailViewModel<TModel>
 {
     protected MudDetailViewModel(IDialogService dialogService, ISnackbar snackbar) : base(dialogService, snackbar)
     {

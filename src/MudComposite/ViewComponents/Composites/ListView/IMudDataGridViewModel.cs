@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
+using MudComposite.Base;
 
 namespace MudComposite.ViewComponents.Composites.ListView;
 
-public interface IMudDataGridViewModel<TModel, TSearchModel>
+public interface IMudDataGridViewModel<TModel, TSearchModel> : IMudViewModelBase
 {
     #region [property]
 
