@@ -1,15 +1,16 @@
+using eXtensionSharp;
 using MudBlazor;
 using MudComposite;
 using MudComposite.ViewComponents.Composites.DetailView;
 
 namespace MudCompositeApp.Composites;
 
-public interface IWeatherDetailComposite : IMudDetailViewComposite<WeatherForecast>
+public interface IWeatherDetailComposite : IMudDetailViewModel<WeatherForecast>
 {
     void Initialize();
 }
 
-public class WeatherDetailComposite : MudDetailViewComposite<WeatherForecast>, IWeatherDetailComposite
+public class WeatherDetailComposite : MudDetailViewModel<WeatherForecast>, IWeatherDetailComposite
 {
     private readonly IWeatherService _weatherService;
     public WeatherDetailComposite(IDialogService dialogService, ISnackbar snackbar, IWeatherService weatherService) : base(dialogService, snackbar)
@@ -19,15 +20,15 @@ public class WeatherDetailComposite : MudDetailViewComposite<WeatherForecast>, I
 
     public void Initialize()
     {
-        this.OnRetrieve = async () => await _weatherService.Get(this.RetrieveItem.Id);
+        this.OnRetrieve = async () => await _weatherService.Get(this.SelectedItem.Id);
         this.OnSubmit = async () =>
-        {   
-            if (this.RetrieveItem.Id > 0)
+        {
+            if (this.SelectedItem.xIsEmpty())
             {
-                return await _weatherService.Modify(this.RetrieveItem);
+                return await _weatherService.Add(this.SelectedItem);    
             }
-
-            return await _weatherService.Add(this.RetrieveItem);
+            
+            return await _weatherService.Modify(this.SelectedItem);
         };
     }
 }

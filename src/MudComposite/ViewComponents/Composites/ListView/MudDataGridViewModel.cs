@@ -28,8 +28,7 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
     /// <summary>
     /// Implement Remove event
     /// </summary>
-    public Func<TModel, Task<Results>> OnRemove { get; set; }    
-    
+    public Func<TModel, Task<Results>> OnRemove { get; set; }   
     public Func<TModel, Task<TModel>> OnSaveBefore { get; set; }
     public Func<TModel, Task<Results>> OnSave { get; set; }
     public Func<TModel, Task<Results>> OnSaveAfter { get; set; }
@@ -50,15 +49,6 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
     {
         this.SearchModel = new TSearchModel();
         NavManager = navigationManager;
-    }
-    
-    /// <summary>
-    /// The grid is initialized in 'OnAfterRender'
-    /// </summary>
-    /// <param name="dataGrid"></param>
-    public void SetUp(MudDataGrid<TModel> dataGrid)
-    {
-        DataGrid = dataGrid;
     }
 
     protected MudTable<TModel> Table;
@@ -213,9 +203,32 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
         
     }
 
-    public virtual void Initialize()
+    /// <summary>
+    /// initialized in 'OnAfterRender'
+    /// </summary>
+    /// <param name="dataGrid"></param>
+    public virtual void Initialize(MudDataGrid<TModel> dataGrid)
     {
-        
+        DataGrid = dataGrid;
+    }
+    
+    protected void NavigateToUrl(string url)
+    {
+        NavManager.NavigateTo(url);
+    }
+
+    protected void NavigateToUrlObject(string url, TModel model)
+    {
+        //save model into local storage, after next page load model from local storage.
+        NavManager.NavigateTo(url, new NavigationOptions()
+        {
+            HistoryEntryState = model.xSerialize()
+        });
+    }
+
+    protected T GetUrlObject<T>()
+    {
+        return NavManager.HistoryEntryState.xDeserialize<T>();
     }
 }
 

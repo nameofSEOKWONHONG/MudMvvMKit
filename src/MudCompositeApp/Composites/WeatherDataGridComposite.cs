@@ -9,12 +9,12 @@ public class SearchModel
     public string City { get; set; }
 }
 
-public interface IWeatherListViewComposite : IMudDataGridComposite<WeatherForecast, SearchModel>
+public interface IWeatherListViewComposite : IMudDataGridViewModel<WeatherForecast, SearchModel>
 {
     
 }
 
-public class WeatherDataGridComposite : MudDataGridComposite<WeatherForecast, SearchModel>, IWeatherListViewComposite
+public class WeatherDataGridComposite : MudDataGridViewModel<WeatherForecast, SearchModel>, IWeatherListViewComposite
 {
     private readonly IWeatherService _weatherService;
     public WeatherDataGridComposite(IDialogService dialogService, 
@@ -25,8 +25,10 @@ public class WeatherDataGridComposite : MudDataGridComposite<WeatherForecast, Se
         _weatherService = weatherService;
     }
 
-    public override void Initialize()
+    public override void Initialize(MudDataGrid<WeatherForecast> dataGrid)
     {
+        base.Initialize(dataGrid);
+        
         this.OnServerReload = async (state) =>
         {
             var result = await _weatherService.GetList(this.SearchModel, state.Page, state.PageSize);

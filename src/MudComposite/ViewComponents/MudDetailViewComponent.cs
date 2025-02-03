@@ -26,20 +26,4 @@ public abstract class MudDetailViewComponent<TParameter, TViewModel> : MudViewCo
             await ViewModel.OnRetrieve();
         }
     }
-    
-    protected sealed override void OnAfterRender(bool firstRender)
-    {
-        OnViewAfterRender(firstRender);
-    }
-    protected virtual void OnViewAfterRender(bool firstRender)
-    {
-        
-    }
-
-    protected sealed override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await OnViewAfterRenderAsync(firstRender);
-    }
-    
-    protected virtual Task OnViewAfterRenderAsync(bool firstRender) { return Task.CompletedTask; }
 }

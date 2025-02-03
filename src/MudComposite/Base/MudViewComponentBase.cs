@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -7,9 +9,12 @@ namespace MudComposite.Base;
 
 public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsyncDisposable, IBrowserViewportObserver
 {
+    [CascadingParameter] protected CultureState CultureState { get; set; }
+    
     [Inject] public IDialogService DialogService { get; set; }
     [Inject] public IBrowserViewportService BrowserViewportService { get; set; } = null!;
     [Inject] public NavigationManager NavManager { get; set; } = null!;
+    [Inject] protected IJSRuntime JSRuntime { get; set; }
     
     protected Breakpoint ViewBreakpoint;
     protected List<Breakpoint> ViewBreakpoints = new();
@@ -21,22 +26,47 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
         NotifyOnBreakpointOnly = true
     };
 
+    #region [orignal lifecycle]
+
     protected sealed override void OnInitialized()
     {
         OnViewInitialized();
+        if (CultureState.xIsNotEmpty())
+        {
+            CultureState.PropertyChanged += CultureStateOnPropertyChanged;    
+        }
     }
-    protected virtual void OnViewInitialized() { }
-
     protected sealed override async Task OnInitializedAsync()
     {
         await BrowserViewportService.SubscribeAsync(this);
 
         await OnViewInitializedAsync();
     }
+    protected sealed override void OnAfterRender(bool firstRender)
+    {
+        OnViewAfterRender(firstRender);
+    }
+    protected sealed override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await OnViewAfterRenderAsync(firstRender);
+    }    
+
+    #endregion
+
+    #region [custom lifecycle]
+
+    protected virtual void OnViewInitialized() { }
     protected virtual Task OnViewInitializedAsync()
     {
         return Task.CompletedTask;
     }
+    protected virtual void OnViewAfterRender(bool firstRender)
+    {
+        
+    }
+    protected virtual Task OnViewAfterRenderAsync(bool firstRender) { return Task.CompletedTask; }    
+
+    #endregion
     
     public Task NotifyBrowserViewportChangeAsync(BrowserViewportEventArgs browserViewportEventArgs)
     {
@@ -51,8 +81,6 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
 
         return InvokeAsync(StateHasChanged);
     }
-    
-    [Inject] protected IJSRuntime JSRuntime { get; set; }
 
     protected virtual async Task Cancel()
     {
@@ -63,17 +91,31 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     {
         await JSRuntime.InvokeVoidAsync("window.history.forward");
     }
+    
+    private void CultureStateOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
 
-    public void Dispose()
+    public virtual void Dispose()
     {
         if (BrowserViewportService is IDisposable browserViewportServiceDisposable)
             browserViewportServiceDisposable.Dispose();
         else if (BrowserViewportService != null)
             _ = BrowserViewportService.DisposeAsync().AsTask();
+
+        if (CultureState.xIsNotEmpty())
+        {
+            CultureState.PropertyChanged -= CultureStateOnPropertyChanged;    
+        }
     }
 
-    public async ValueTask DisposeAsync()
+    public virtual async ValueTask DisposeAsync()
     {
         if (BrowserViewportService != null) await BrowserViewportService.DisposeAsync();
+        if (CultureState.xIsNotEmpty())
+        {
+            CultureState.PropertyChanged -= CultureStateOnPropertyChanged;    
+        }
     }
 }

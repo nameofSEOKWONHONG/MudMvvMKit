@@ -13,11 +13,11 @@
 <MudDataGrid T="WeatherForecast"
              EditMode="DataGridEditMode.Form"
              Dense="true"
-             ServerData="Composite.ServerReload"
+             ServerData="ViewModel.ServerReload"
              Filterable="false"
              SortMode="SortMode.None"
-             RowStyleFunc="Composite.RowStyleFunc"
-             RowClick="Composite.DataGridRowClick"
+             RowStyleFunc="ViewModel.RowStyleFunc"
+             RowClick="ViewModel.DataGridRowClick"
              @ref="_dataGrid">
     <Columns>
         <PropertyColumn Property="m => m.Date"/>
@@ -26,8 +26,8 @@
         <PropertyColumn Property="m => m.TemperatureF"/>
         <TemplateColumn>
             <CellTemplate>
-                <MudButton Variant="Variant.Filled" OnClick="@(() => Composite.GoDetail())"></MudButton>
-                <MudButton Variant="Variant.Filled" OnClick="@(() => Composite.Remove(context.Item))">delete</MudButton>
+                <MudButton Variant="Variant.Filled" OnClick="@(() => ViewModel.GoDetail())"></MudButton>
+                <MudButton Variant="Variant.Filled" OnClick="@(() => ViewModel.Remove(context.Item))">delete</MudButton>
             </CellTemplate>
         </TemplateColumn>
     </Columns>
@@ -44,7 +44,7 @@
     {
         if (firstRender)
         {
-            Composite.SetUp(_dataGrid);
+            ViewModel.Initialize(_dataGrid);
         }
     }
 }

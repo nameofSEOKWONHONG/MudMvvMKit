@@ -5,8 +5,8 @@
 
 <MudContainer>
     <MudPaper>
-        <MudText>@this.Composite.RetrieveItem.Id</MudText>
-        <MudNumericField T="int" Label="Temperature" Value="@Composite.RetrieveItem.TemperatureC"/>
+        <MudText>@this.ViewModel..Id</MudText>
+        <MudNumericField T="int" Label="Temperature" Value="@ViewModel.SelectedItem.TemperatureC"/>
     </MudPaper>
     <MudButton OnClick="this.Summit">Summit</MudButton>
     <MudButton OnClick="this.Cancel">Go Back</MudButton>
@@ -25,7 +25,7 @@
 
     protected override void OnViewInitialized()
     {
-        this.Composite.Initialize();
+        this.ViewModel.Initialize();
     }
 
     protected override async Task OnViewAfterRenderAsync(bool firstRender)

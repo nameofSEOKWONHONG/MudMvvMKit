@@ -31,10 +31,9 @@ public interface IMudDataGridViewModel<TModel, TSearchModel> : IMudViewModelBase
     void DataGridRowClick(DataGridRowClickEventArgs<TModel> obj);
     string RowStyleFunc(TModel item, int id);
     Task SearchClear();
-    void SetUp(MudDataGrid<TModel> dataGrid);
     void GoDetail();
 
-    void Initialize();
+    void Initialize(MudDataGrid<TModel> dataGrid);
 
     #endregion
 }
