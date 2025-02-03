@@ -29,4 +29,9 @@
     <ItemGroup>
         <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Components.Authorization">
+        <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\9.0.0\Microsoft.AspNetCore.Components.Authorization.dll</HintPath>
+      </Reference>
+    </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 using System.ComponentModel;
+using System.Security.Claims;
 using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Services;
@@ -15,9 +17,11 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     [Inject] public IBrowserViewportService BrowserViewportService { get; set; } = null!;
     [Inject] public NavigationManager NavManager { get; set; } = null!;
     [Inject] protected IJSRuntime JSRuntime { get; set; }
+    [Inject] protected AuthenticationStateProvider AuthStateProvider { get; set; }
     
     protected Breakpoint ViewBreakpoint;
     protected List<Breakpoint> ViewBreakpoints = new();
+    protected UserSession UserSession;
     
     Guid IBrowserViewportObserver.Id { get; } = Guid.NewGuid();
     ResizeOptions IBrowserViewportObserver.ResizeOptions { get; } = new()
@@ -49,6 +53,10 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     protected sealed override async Task OnAfterRenderAsync(bool firstRender)
     {
         await OnViewAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            this.UserSession = await GetUserSession();
+        }
     }    
 
     #endregion
@@ -90,6 +98,27 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     protected virtual async Task Forward()
     {
         await JSRuntime.InvokeVoidAsync("window.history.forward");
+    }
+
+    protected async Task<UserSession> GetUserSession()
+    {
+        var state = await this.AuthStateProvider.GetAuthenticationStateAsync();
+        var userId = state.User.Claims.First(m => m.Type == ClaimTypes.NameIdentifier).Value;
+        var email = state.User.Claims.First(m => m.Type == ClaimTypes.Email).Value;
+        var name = state.User.Claims.First(m => m.Type == ClaimTypes.Name).Value;
+        var key = state.User.Claims.First(m => m.Type == ClaimTypes.PrimarySid).Value;
+        var phone = state.User.Claims.First(m => m.Type == ClaimTypes.MobilePhone).Value;
+        var role = state.User.Claims.First(m => m.Type == ClaimTypes.Role).Value;
+
+        return new UserSession()
+        {
+            UserId = userId,
+            Email = email,
+            Name = name,
+            Role = role,
+            UserKey = key,
+            Phone = phone,
+        };
     }
     
     private void CultureStateOnPropertyChanged(object sender, PropertyChangedEventArgs e)

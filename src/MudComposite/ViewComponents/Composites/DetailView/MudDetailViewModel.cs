@@ -1,4 +1,5 @@
 ﻿using eXtensionSharp;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudComposite.Base;
 
@@ -6,7 +7,7 @@ namespace MudComposite.ViewComponents.Composites.DetailView;
 
 public abstract class MudDetailViewModel<TModel> : MudViewModelBase, IMudDetailViewModel<TModel>
 {
-    protected MudDetailViewModel(IDialogService dialogService, ISnackbar snackbar) : base(dialogService, snackbar)
+    protected MudDetailViewModel(IDialogService dialogService, ISnackbar snackbar, AuthenticationStateProvider authenticationStateProvider) : base(dialogService, snackbar, authenticationStateProvider)
     {
     }
 

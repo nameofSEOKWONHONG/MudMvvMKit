@@ -1,5 +1,6 @@
 ﻿using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using MudComposite.Base;
@@ -38,21 +39,22 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
     #region [protected variables]
 
     protected MudDataGrid<TModel> DataGrid { get; set; }
-
+    protected UserSession UserSession { get; }
+    protected NavigationManager NavManager { get; }
+    protected MudTable<TModel> Table  { get; }
     
     #endregion
 
-    protected NavigationManager NavManager;
+    
     public MudDataGridViewModel(IDialogService dialogService,
         ISnackbar snackbar,
-        NavigationManager navigationManager) : base(dialogService, snackbar)
+        NavigationManager navigationManager,
+        AuthenticationStateProvider authenticationStateProvider) : base(dialogService, snackbar, authenticationStateProvider)
     {
         this.SearchModel = new TSearchModel();
         NavManager = navigationManager;
     }
 
-    protected MudTable<TModel> Table;
-    
     #region [events]
 
     /// <summary>
@@ -86,7 +88,17 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
         if(this.DataGrid.xIsEmpty()) return;
         await this.DataGrid.ReloadServerData();
     }
-    
+
+    public override async Task Click(string id, object obj)
+    {
+        if (OnClick.xIsEmpty()) return;
+        
+        var item = obj.xAs<TModel>();
+        if(item.xIsNotEmpty()) this.SelectedItem = item;
+
+        await OnClick(id, obj);
+    }
+
     /// <summary>
     /// Search event linked to the grid
     /// </summary>

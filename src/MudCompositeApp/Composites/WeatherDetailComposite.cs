@@ -1,4 +1,5 @@
 using eXtensionSharp;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudComposite;
 using MudComposite.ViewComponents.Composites.DetailView;
@@ -13,7 +14,8 @@ public interface IWeatherDetailComposite : IMudDetailViewModel<WeatherForecast>
 public class WeatherDetailComposite : MudDetailViewModel<WeatherForecast>, IWeatherDetailComposite
 {
     private readonly IWeatherService _weatherService;
-    public WeatherDetailComposite(IDialogService dialogService, ISnackbar snackbar, IWeatherService weatherService) : base(dialogService, snackbar)
+    public WeatherDetailComposite(IDialogService dialogService, ISnackbar snackbar, AuthenticationStateProvider authenticationStateProvider, 
+        IWeatherService weatherService) : base(dialogService, snackbar, authenticationStateProvider)
     {
         _weatherService = weatherService;
     }
