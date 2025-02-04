@@ -1,6 +1,5 @@
 ﻿using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using MudComposite.Base;
@@ -38,21 +37,16 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
 
     #region [protected variables]
 
-    protected MudDataGrid<TModel> DataGrid { get; set; }
-    protected UserSession UserSession { get; }
+    public MudDataGrid<TModel> DataGrid { get; set; }
     protected NavigationManager NavManager { get; }
     protected MudTable<TModel> Table  { get; }
     
     #endregion
 
     
-    public MudDataGridViewModel(IDialogService dialogService,
-        ISnackbar snackbar,
-        NavigationManager navigationManager,
-        AuthenticationStateProvider authenticationStateProvider) : base(dialogService, snackbar, authenticationStateProvider)
+    public MudDataGridViewModel(MudViewModelItem viewModelItem) : base(viewModelItem)
     {
         this.SearchModel = new TSearchModel();
-        NavManager = navigationManager;
     }
 
     #region [events]
@@ -74,7 +68,7 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
             Position = DialogPosition.Center,
             NoHeader = true
         };
-        var dlg = await this.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
+        var dlg = await this.MudViewModelItem.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
         var result = await OnServerReload(state);
         
         await Task.Delay(Delay);
@@ -156,7 +150,7 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
     {
         if(OnRemove.xIsEmpty()) return;
         
-        var question = await this.DialogService.ShowMessageBox("경고", "선택한 데이터를 삭제 하시겠습니까? (삭제된 데이터는 복구할 수 없습니다.)", "YES", "NO");
+        var question = await this.MudViewModelItem.DialogService.ShowMessageBox("경고", "선택한 데이터를 삭제 하시겠습니까? (삭제된 데이터는 복구할 수 없습니다.)", "YES", "NO");
         if (question.GetValueOrDefault())
         {
             var dlgOption = new DialogOptions()
@@ -167,7 +161,7 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
                 Position = DialogPosition.Center,
                 NoHeader = true
             };
-            var dlg = await this.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
+            var dlg = await this.MudViewModelItem.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
             var result = await OnRemove(item);
             await Task.Delay(Delay);
             dlg.Close();
@@ -175,11 +169,11 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
             if (result.Succeeded)
             {
                 await this.DataGrid.ReloadServerData();
-                this.SnackBar.Add(result.Messages.xJoin(), Severity.Success);
+                this.MudViewModelItem.Snackbar.Add(result.Messages.xJoin(), Severity.Success);
             }
             else
             {
-                this.SnackBar.Add(result.Messages.xJoin(), Severity.Error);
+                this.MudViewModelItem.Snackbar.Add(result.Messages.xJoin(), Severity.Error);
             }
         }
     }
@@ -223,7 +217,13 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
     {
         DataGrid = dataGrid;
     }
-    
+
+    public virtual Task InitializeAsync(MudDataGrid<TModel> dataGrid)
+    {
+        DataGrid = dataGrid;
+        return Task.CompletedTask;
+    }
+
     protected void NavigateToUrl(string url)
     {
         NavManager.NavigateTo(url);

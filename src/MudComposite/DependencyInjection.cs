@@ -8,5 +8,6 @@ public static class DependencyInjection
     public static void AddMudComposite(this IServiceCollection services)
     {
         services.AddScoped<IJsWindow, JsWindow>();
+        services.AddScoped<MudViewModelItem>();
     }
 }

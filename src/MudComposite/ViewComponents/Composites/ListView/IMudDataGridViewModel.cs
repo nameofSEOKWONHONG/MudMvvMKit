@@ -5,6 +5,7 @@ using MudComposite.Base;
 namespace MudComposite.ViewComponents.Composites.ListView;
 
 public interface IMudDataGridViewModel<TModel, TSearchModel> : IMudViewModelBase
+    where TModel : class, new()
 {
     #region [property]
 
@@ -12,6 +13,8 @@ public interface IMudDataGridViewModel<TModel, TSearchModel> : IMudViewModelBase
     List<TModel> SelectedItems { get; set; }
     TSearchModel SearchModel { get; set; }    
 
+    MudDataGrid<TModel> DataGrid { get; set; }
+    
     #endregion
 
     #region [event]
@@ -34,6 +37,6 @@ public interface IMudDataGridViewModel<TModel, TSearchModel> : IMudViewModelBase
     void GoDetail();
 
     void Initialize(MudDataGrid<TModel> dataGrid);
-
+    Task InitializeAsync(MudDataGrid<TModel> dataGrid);
     #endregion
 }

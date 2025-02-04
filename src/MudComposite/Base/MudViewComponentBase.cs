@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Security.Claims;
 using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -11,7 +10,7 @@ namespace MudComposite.Base;
 
 public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsyncDisposable, IBrowserViewportObserver
 {
-    [CascadingParameter] protected CultureState CultureState { get; set; }
+    [CascadingParameter] protected INotifyPropertyChanged AppState { get; set; }
     
     [Inject] public IDialogService DialogService { get; set; }
     [Inject] public IBrowserViewportService BrowserViewportService { get; set; } = null!;
@@ -21,7 +20,6 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     
     protected Breakpoint ViewBreakpoint;
     protected List<Breakpoint> ViewBreakpoints = new();
-    protected UserSession UserSession;
     
     Guid IBrowserViewportObserver.Id { get; } = Guid.NewGuid();
     ResizeOptions IBrowserViewportObserver.ResizeOptions { get; } = new()
@@ -35,9 +33,9 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     protected sealed override void OnInitialized()
     {
         OnViewInitialized();
-        if (CultureState.xIsNotEmpty())
+        if (AppState.xIsNotEmpty())
         {
-            CultureState.PropertyChanged += CultureStateOnPropertyChanged;    
+            AppState.PropertyChanged += AppStateOnPropertyChanged;    
         }
     }
     protected sealed override async Task OnInitializedAsync()
@@ -53,11 +51,7 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     protected sealed override async Task OnAfterRenderAsync(bool firstRender)
     {
         await OnViewAfterRenderAsync(firstRender);
-        if (firstRender)
-        {
-            this.UserSession = await GetUserSession();
-        }
-    }    
+    }
 
     #endregion
 
@@ -99,29 +93,8 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     {
         await JSRuntime.InvokeVoidAsync("window.history.forward");
     }
-
-    protected async Task<UserSession> GetUserSession()
-    {
-        var state = await this.AuthStateProvider.GetAuthenticationStateAsync();
-        var userId = state.User.Claims.First(m => m.Type == ClaimTypes.NameIdentifier).Value;
-        var email = state.User.Claims.First(m => m.Type == ClaimTypes.Email).Value;
-        var name = state.User.Claims.First(m => m.Type == ClaimTypes.Name).Value;
-        var key = state.User.Claims.First(m => m.Type == ClaimTypes.PrimarySid).Value;
-        var phone = state.User.Claims.First(m => m.Type == ClaimTypes.MobilePhone).Value;
-        var role = state.User.Claims.First(m => m.Type == ClaimTypes.Role).Value;
-
-        return new UserSession()
-        {
-            UserId = userId,
-            Email = email,
-            Name = name,
-            Role = role,
-            UserKey = key,
-            Phone = phone,
-        };
-    }
     
-    private void CultureStateOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void AppStateOnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         StateHasChanged();
     }
@@ -133,18 +106,18 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
         else if (BrowserViewportService != null)
             _ = BrowserViewportService.DisposeAsync().AsTask();
 
-        if (CultureState.xIsNotEmpty())
+        if (AppState.xIsNotEmpty())
         {
-            CultureState.PropertyChanged -= CultureStateOnPropertyChanged;    
+            AppState.PropertyChanged -= AppStateOnPropertyChanged;    
         }
     }
 
     public virtual async ValueTask DisposeAsync()
     {
         if (BrowserViewportService != null) await BrowserViewportService.DisposeAsync();
-        if (CultureState.xIsNotEmpty())
+        if (AppState.xIsNotEmpty())
         {
-            CultureState.PropertyChanged -= CultureStateOnPropertyChanged;    
+            AppState.PropertyChanged -= AppStateOnPropertyChanged;    
         }
     }
 }

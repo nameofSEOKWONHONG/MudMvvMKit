@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using MudComposite.Base;
 using MudComposite.ViewComponents.Composites.ListView;
 
 namespace MudCompositeApp.Composites;
@@ -18,11 +19,8 @@ public interface IWeatherListViewComposite : IMudDataGridViewModel<WeatherForeca
 public class WeatherDataGridComposite : MudDataGridViewModel<WeatherForecast, SearchModel>, IWeatherListViewComposite
 {
     private readonly IWeatherService _weatherService;
-    public WeatherDataGridComposite(IDialogService dialogService, 
-        ISnackbar snackbar, 
-        NavigationManager navigationManager,
-        AuthenticationStateProvider authenticationStateProvider,
-        IWeatherService weatherService) : base(dialogService, snackbar, navigationManager, authenticationStateProvider)
+    public WeatherDataGridComposite(MudViewModelItem mudViewModelItem,
+        IWeatherService weatherService) : base(mudViewModelItem)
     {
         _weatherService = weatherService;
     }

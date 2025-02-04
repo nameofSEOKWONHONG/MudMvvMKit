@@ -1,5 +1,4 @@
 ﻿using eXtensionSharp;
-using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudComposite.Base;
 
@@ -7,7 +6,7 @@ namespace MudComposite.ViewComponents.Composites.DetailView;
 
 public abstract class MudDetailViewModel<TModel> : MudViewModelBase, IMudDetailViewModel<TModel>
 {
-    protected MudDetailViewModel(IDialogService dialogService, ISnackbar snackbar, AuthenticationStateProvider authenticationStateProvider) : base(dialogService, snackbar, authenticationStateProvider)
+    protected MudDetailViewModel(MudViewModelItem mudViewModelItem) : base(mudViewModelItem)
     {
     }
 
@@ -24,7 +23,7 @@ public abstract class MudDetailViewModel<TModel> : MudViewModelBase, IMudDetailV
         await Task.Delay(Delay);
         dlg.Close();
 
-        this.SnackBar.Add(result.Messages.xJoin(), result.Succeeded ? Severity.Success : Severity.Error);        
+        this.MudViewModelItem.Snackbar.Add(result.Messages.xJoin(), result.Succeeded ? Severity.Success : Severity.Error);        
     }
 
     public virtual async Task Submit()
@@ -36,6 +35,6 @@ public abstract class MudDetailViewModel<TModel> : MudViewModelBase, IMudDetailV
         await Task.Delay(Delay);
         dlg.Close();
 
-        this.SnackBar.Add(result.Messages.xJoin(), result.Succeeded ? Severity.Success : Severity.Error);
+        this.MudViewModelItem.Snackbar.Add(result.Messages.xJoin(), result.Succeeded ? Severity.Success : Severity.Error);
     }
 }
