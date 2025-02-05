@@ -38,7 +38,6 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
     #region [protected variables]
 
     public MudDataGrid<TModel> DataGrid { get; set; }
-    protected NavigationManager NavManager { get; }
     protected MudTable<TModel> Table  { get; }
     
     #endregion
@@ -68,7 +67,7 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
             Position = DialogPosition.Center,
             NoHeader = true
         };
-        var dlg = await this.MudViewModelItem.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
+        var dlg = await this.Utility.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
         var result = await OnServerReload(state);
         
         await Task.Delay(Delay);
@@ -150,7 +149,7 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
     {
         if(OnRemove.xIsEmpty()) return;
         
-        var question = await this.MudViewModelItem.DialogService.ShowMessageBox("경고", "선택한 데이터를 삭제 하시겠습니까? (삭제된 데이터는 복구할 수 없습니다.)", "YES", "NO");
+        var question = await this.Utility.DialogService.ShowMessageBox("경고", "선택한 데이터를 삭제 하시겠습니까? (삭제된 데이터는 복구할 수 없습니다.)", "YES", "NO");
         if (question.GetValueOrDefault())
         {
             var dlgOption = new DialogOptions()
@@ -161,7 +160,7 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
                 Position = DialogPosition.Center,
                 NoHeader = true
             };
-            var dlg = await this.MudViewModelItem.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
+            var dlg = await this.Utility.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
             var result = await OnRemove(item);
             await Task.Delay(Delay);
             dlg.Close();
@@ -169,11 +168,11 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
             if (result.Succeeded)
             {
                 await this.DataGrid.ReloadServerData();
-                this.MudViewModelItem.Snackbar.Add(result.Messages.xJoin(), Severity.Success);
+                this.Utility.Snackbar.Add(result.Messages.xJoin(), Severity.Success);
             }
             else
             {
-                this.MudViewModelItem.Snackbar.Add(result.Messages.xJoin(), Severity.Error);
+                this.Utility.Snackbar.Add(result.Messages.xJoin(), Severity.Error);
             }
         }
     }
@@ -226,13 +225,13 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
 
     protected void NavigateToUrl(string url)
     {
-        NavManager.NavigateTo(url);
+        this.Utility.NavigationManager.NavigateTo(url);
     }
 
     protected void NavigateToUrlObject(string url, TModel model)
     {
         //save model into local storage, after next page load model from local storage.
-        NavManager.NavigateTo(url, new NavigationOptions()
+        this.Utility.NavigationManager.NavigateTo(url, new NavigationOptions()
         {
             HistoryEntryState = model.xSerialize()
         });
@@ -240,7 +239,7 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
 
     protected T GetUrlObject<T>()
     {
-        return NavManager.HistoryEntryState.xDeserialize<T>();
+        return this.Utility.NavigationManager.HistoryEntryState.xDeserialize<T>();
     }
 }
 

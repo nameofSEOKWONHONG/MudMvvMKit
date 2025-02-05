@@ -6,7 +6,7 @@ namespace MudComposite.ViewComponents.Composites.DetailView;
 
 public abstract class MudDetailViewModel<TModel> : MudViewModelBase, IMudDetailViewModel<TModel>
 {
-    protected MudDetailViewModel(MudViewModelItem mudViewModelItem) : base(mudViewModelItem)
+    protected MudDetailViewModel(MudViewModelItem utility) : base(utility)
     {
     }
 
@@ -23,7 +23,7 @@ public abstract class MudDetailViewModel<TModel> : MudViewModelBase, IMudDetailV
         await Task.Delay(Delay);
         dlg.Close();
 
-        this.MudViewModelItem.Snackbar.Add(result.Messages.xJoin(), result.Succeeded ? Severity.Success : Severity.Error);        
+        this.Utility.Snackbar.Add(result.Messages.xJoin(), result.Succeeded ? Severity.Success : Severity.Error);        
     }
 
     public virtual async Task Submit()
@@ -35,6 +35,6 @@ public abstract class MudDetailViewModel<TModel> : MudViewModelBase, IMudDetailV
         await Task.Delay(Delay);
         dlg.Close();
 
-        this.MudViewModelItem.Snackbar.Add(result.Messages.xJoin(), result.Succeeded ? Severity.Success : Severity.Error);
+        this.Utility.Snackbar.Add(result.Messages.xJoin(), result.Succeeded ? Severity.Success : Severity.Error);
     }
 }

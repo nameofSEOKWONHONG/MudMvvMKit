@@ -6,12 +6,12 @@ namespace MudComposite.Base;
 
 public abstract class MudViewModelCore
 {
-    public readonly MudViewModelItem MudViewModelItem;
+    public readonly MudViewModelItem Utility;
     protected const int Delay = 500;
 
-    public MudViewModelCore(MudViewModelItem mudViewModelItem)
+    public MudViewModelCore(MudViewModelItem utility)
     {
-        MudViewModelItem = mudViewModelItem;
+        Utility = utility;
     }
     
     protected async Task<IDialogReference> ShowProgressDialog()
@@ -24,7 +24,7 @@ public abstract class MudViewModelCore
             Position = DialogPosition.Center,
             NoHeader = true
         };
-        return await this.MudViewModelItem.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
+        return await this.Utility.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
     }
 }
 
@@ -36,7 +36,7 @@ public interface IMudViewModelBase
 
 public abstract class MudViewModelBase : MudViewModelCore, IMudViewModelBase
 {
-    protected MudViewModelBase(MudViewModelItem mudViewModelItem) : base(mudViewModelItem)
+    protected MudViewModelBase(MudViewModelItem utility) : base(utility)
     {
     }
     
