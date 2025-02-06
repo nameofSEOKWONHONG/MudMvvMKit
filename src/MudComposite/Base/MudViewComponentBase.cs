@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Services;
@@ -16,7 +15,6 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     [Inject] public IBrowserViewportService BrowserViewportService { get; set; } = null!;
     [Inject] public NavigationManager NavManager { get; set; } = null!;
     [Inject] protected IJSRuntime JSRuntime { get; set; }
-    [Inject] protected AuthenticationStateProvider AuthStateProvider { get; set; }
     
     protected Breakpoint ViewBreakpoint;
     protected List<Breakpoint> ViewBreakpoints = new();
