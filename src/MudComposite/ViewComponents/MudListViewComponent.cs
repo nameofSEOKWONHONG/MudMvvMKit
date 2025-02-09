@@ -19,7 +19,7 @@ public abstract class MudListViewComponent<TModel, TSearchModel, TViewModel> : M
     {
         if (firstRender)
         {
-            ViewModel.Initialize(DataGrid);    
+            ViewModel.Initialize();    
         }
     }
 
@@ -27,7 +27,7 @@ public abstract class MudListViewComponent<TModel, TSearchModel, TViewModel> : M
     {
         if (firstRender)
         {
-            await ViewModel.InitializeAsync(DataGrid);
+            await ViewModel.InitializeAsync();
         }
     }
 }

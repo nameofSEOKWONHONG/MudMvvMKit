@@ -212,14 +212,12 @@ public abstract class MudDataGridViewModel<TModel, TSearchModel> : MudViewModelB
     /// initialized in 'OnAfterRender'
     /// </summary>
     /// <param name="dataGrid"></param>
-    public virtual void Initialize(MudDataGrid<TModel> dataGrid)
+    public virtual void Initialize()
     {
-        DataGrid = dataGrid;
     }
 
-    public virtual Task InitializeAsync(MudDataGrid<TModel> dataGrid)
+    public virtual Task InitializeAsync()
     {
-        DataGrid = dataGrid;
         return Task.CompletedTask;
     }
 

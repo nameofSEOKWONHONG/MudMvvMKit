@@ -36,7 +36,7 @@ public interface IMudDataGridViewModel<TModel, TSearchModel> : IMudViewModelBase
     Task SearchClear();
     void GoDetail();
 
-    void Initialize(MudDataGrid<TModel> dataGrid);
-    Task InitializeAsync(MudDataGrid<TModel> dataGrid);
+    void Initialize();
+    Task InitializeAsync();
     #endregion
 }
