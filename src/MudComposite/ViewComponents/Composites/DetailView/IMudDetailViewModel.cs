@@ -1,10 +1,13 @@
-﻿using MudComposite.Base;
+﻿using MudBlazor;
+using MudComposite.Base;
 
 namespace MudComposite.ViewComponents.Composites.DetailView;
 
-public interface IMudDetailViewModel<TModel>: IMudViewModelBase
+public interface IMudDetailViewModel<TParameter, TModel>: IMudViewModelBase
 {
-    TModel SelectedItem { get; set; }
+    MudForm MudForm { get; set; }
+    TModel RetrievedItem { get; set; }
+    TParameter Parameter { get; set; }
     
     #region [event]
 
@@ -12,4 +15,7 @@ public interface IMudDetailViewModel<TModel>: IMudViewModelBase
     Func<Task<Results>> OnRetrieve { get; set; }    
 
     #endregion
+
+    Task Retrieve();
+    Task Submit();
 }

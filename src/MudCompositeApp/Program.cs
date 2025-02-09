@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
+using MudComposite.Base;
 using MudCompositeApp;
 using MudCompositeApp.Composites;
 
@@ -10,6 +11,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMudServices();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<IWeatherListViewComposite, WeatherDataGridComposite>();
+builder.Services.AddScoped<IWeatherDetailComposite, WeatherDetailComposite>();
+builder.Services.AddScoped<MudViewModelItem>();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

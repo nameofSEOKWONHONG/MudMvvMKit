@@ -1,18 +1,16 @@
 using eXtensionSharp;
-using Microsoft.AspNetCore.Components.Authorization;
-using MudBlazor;
-using MudComposite;
+using FluentValidation;
 using MudComposite.Base;
 using MudComposite.ViewComponents.Composites.DetailView;
 
 namespace MudCompositeApp.Composites;
 
-public interface IWeatherDetailComposite : IMudDetailViewModel<WeatherForecast>
+public interface IWeatherDetailComposite : IMudDetailViewModel<int, WeatherForecast>
 {
     void Initialize();
 }
 
-public class WeatherDetailComposite : MudDetailViewModel<WeatherForecast>, IWeatherDetailComposite
+public class WeatherDetailComposite : MudDetailViewModel<int, WeatherForecast>, IWeatherDetailComposite
 {
     private readonly IWeatherService _weatherService;
     public WeatherDetailComposite(MudViewModelItem mudViewModelItem,
@@ -23,15 +21,37 @@ public class WeatherDetailComposite : MudDetailViewModel<WeatherForecast>, IWeat
 
     public void Initialize()
     {
-        this.OnRetrieve = async () => await _weatherService.Get(this.SelectedItem.Id);
+        this.OnRetrieve = async () =>
+        {
+            var result = await _weatherService.Get(this.Parameter);
+            this.RetrievedItem = result.Data;
+            return result;
+        };
         this.OnSubmit = async () =>
         {
-            if (this.SelectedItem.xIsEmpty())
+            if (this.RetrievedItem.Id <= 0)
             {
-                return await _weatherService.Add(this.SelectedItem);    
+                return await _weatherService.Add(this.RetrievedItem);    
             }
             
-            return await _weatherService.Modify(this.SelectedItem);
+            return await _weatherService.Modify(this.RetrievedItem);
         };
     }
+}
+
+public class WeatherForecastValidator : AbstractValidator<WeatherForecast>
+{
+    public WeatherForecastValidator()
+    {
+        this.RuleFor(x => x.TemperatureC).GreaterThan(6);
+    }
+        
+    public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
+    {
+        var name = propertyName.xSplit(".")[1];        
+        var result = await ValidateAsync(ValidationContext<WeatherForecast>.CreateWithOptions((WeatherForecast)model, x => x.IncludeProperties(name)));
+        if (result.IsValid)
+            return Array.Empty<string>();
+        return result.Errors.Select(e => e.ErrorMessage);
+    };        
 }

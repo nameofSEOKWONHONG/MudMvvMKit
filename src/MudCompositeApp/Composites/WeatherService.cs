@@ -34,7 +34,13 @@ public class WeatherService : IWeatherService
         return await PaginatedResult<WeatherForecast>.SuccessAsync(items, _forecasts.Count, pageNo, pageSize);
     }
 
-    public async Task<Results<WeatherForecast>> Get(int id) => await _httpClient.GetFromJsonAsync<Results<WeatherForecast>>($"api/weather/{id}");
+    public async Task<Results<WeatherForecast>> Get(int id)
+    {
+        //var result = await _httpClient.GetFromJsonAsync<Results<WeatherForecast>>($"api/weather/{id}");
+        var result = await _httpClient.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        var item = result.FirstOrDefault(m => m.Id == id);
+        return await Results<WeatherForecast>.SuccessAsync(item);
+    }
 
     public async Task<Results<bool>> Modify(WeatherForecast item)
     {

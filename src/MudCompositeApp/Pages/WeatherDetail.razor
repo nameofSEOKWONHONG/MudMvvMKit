@@ -1,39 +1,36 @@
-@page "/weather/detail/{id}"
+@page "/weather/detail/{id:int}"
 
 @using MudCompositeApp.Composites
-@inherits MudComposite.ViewComponents.MudDetailViewComponent<WeatherForecast, MudCompositeApp.Composites.IWeatherDetailComposite>
+@inherits MudComposite.ViewComponents.MudDetailViewComponent<int, WeatherForecast, MudCompositeApp.Composites.IWeatherDetailComposite>
 
 <MudContainer>
-    <MudPaper>
-        <MudText>@this.ViewModel..Id</MudText>
-        <MudNumericField T="int" Label="Temperature" Value="@ViewModel.SelectedItem.TemperatureC"/>
-    </MudPaper>
-    <MudButton OnClick="this.Summit">Summit</MudButton>
+    <MudForm Model="@ViewModel.RetrievedItem" @ref="@ViewModel.MudForm" Validation="@(_validator.ValidateValue)" ValidationDelay="0">
+        <MudPaper>
+            <MudText>@ViewModel.RetrievedItem.Id</MudText>
+            <MudNumericField Label="TemperatureC" @bind-Value="ViewModel.RetrievedItem.TemperatureC" For="@(() =>ViewModel.RetrievedItem.TemperatureC)" Immediate="true"/>
+        </MudPaper>
+    </MudForm>
+    <MudButton OnClick="this.ViewModel.Submit">Submit</MudButton>
     <MudButton OnClick="this.Cancel">Go Back</MudButton>
 </MudContainer>
 
 @code {
     [Parameter] public int Id { get; set; }
 
-    protected override void OnParametersSet()
-    {
-        this.Parameter = new()
-        {
-            Id = Id
-        };
-    }
+    WeatherForecastValidator _validator = new WeatherForecastValidator();
 
     protected override void OnViewInitialized()
     {
         this.ViewModel.Initialize();
+        this.ViewModel.Parameter = Id;
     }
 
     protected override async Task OnViewAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await this.Retrieve();
+            await this.ViewModel.Retrieve();
+            await InvokeAsync(StateHasChanged);
         }
     }
-
 }

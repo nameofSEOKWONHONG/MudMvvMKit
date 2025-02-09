@@ -18,7 +18,7 @@
              SortMode="SortMode.None"
              RowStyleFunc="ViewModel.RowStyleFunc"
              RowClick="ViewModel.DataGridRowClick"
-             @ref="_dataGrid">
+             @ref="ViewModel.DataGrid">
     <Columns>
         <PropertyColumn Property="m => m.Date"/>
         <PropertyColumn Property="m => m.Summary"/>
@@ -26,7 +26,7 @@
         <PropertyColumn Property="m => m.TemperatureF"/>
         <TemplateColumn>
             <CellTemplate>
-                <MudButton Variant="Variant.Filled" OnClick="@(() => ViewModel.GoDetail())"></MudButton>
+                <MudButton Variant="Variant.Filled" OnClick="@(() => ViewModel.Click("detail", context.Item))"></MudButton>
                 <MudButton Variant="Variant.Filled" OnClick="@(() => ViewModel.Remove(context.Item))">delete</MudButton>
             </CellTemplate>
         </TemplateColumn>
@@ -39,12 +39,11 @@
 <MudButton OnClick="Cancel">Go BACK</MudButton>
 
 @code {
-    MudDataGrid<WeatherForecast> _dataGrid;
     protected override void OnViewAfterRender(bool firstRender)
     {
         if (firstRender)
         {
-            ViewModel.Initialize(_dataGrid);
+            ViewModel.Initialize();
         }
     }
 }

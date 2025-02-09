@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
+﻿using eXtensionSharp;
 using MudBlazor;
 using MudComposite.Base;
 using MudComposite.ViewComponents.Composites.ListView;
@@ -25,10 +24,8 @@ public class WeatherDataGridComposite : MudDataGridViewModel<WeatherForecast, Se
         _weatherService = weatherService;
     }
 
-    public override void Initialize(MudDataGrid<WeatherForecast> dataGrid)
-    {
-        base.Initialize(dataGrid);
-        
+    public override void Initialize()
+    {   
         this.OnServerReload = async (state) =>
         {
             var result = await _weatherService.GetList(this.SearchModel, state.Page, state.PageSize);
@@ -39,6 +36,17 @@ public class WeatherDataGridComposite : MudDataGridViewModel<WeatherForecast, Se
             };
         };
         this.OnRemove = async (item) => await _weatherService.Remove(this.SelectedItem.Id);
+        this.OnClick = (key, item) =>
+        {
+            var selectedItem = item.xAs<WeatherForecast>();
+
+            if (key == "detail")
+            {
+                this.Utility.NavigationManager.NavigateTo($"/weather/detail/{selectedItem.Id}");
+            }
+
+            return Task.CompletedTask;
+        };
     }
 
 
@@ -49,6 +57,6 @@ public class WeatherDataGridComposite : MudDataGridViewModel<WeatherForecast, Se
 
     public override void GoDetail()
     {
-        this.NavManager.NavigateTo($"/weather/detail/{this.SelectedItem.Id}");
+        this.Utility.NavigationManager.NavigateTo($"/weather/detail/{this.SelectedItem.Id}");
     }
 }
