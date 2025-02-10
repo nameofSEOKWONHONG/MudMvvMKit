@@ -5,7 +5,6 @@ namespace MudComposite.ViewComponents.Composites.DetailView;
 
 public interface IMudDetailViewModel<TParameter, TModel>: IMudViewModelBase
 {
-    MudForm MudForm { get; set; }
     TModel RetrievedItem { get; set; }
     TParameter Parameter { get; set; }
     
@@ -15,7 +14,4 @@ public interface IMudDetailViewModel<TParameter, TModel>: IMudViewModelBase
     Func<Task<Results>> OnRetrieve { get; set; }    
 
     #endregion
-
-    Task Retrieve();
-    Task Submit();
 }

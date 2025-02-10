@@ -38,4 +38,7 @@
     <ItemGroup>
       <Folder Include="wwwroot\" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\BlazorSecretManager\BlazorTrivialJs\BlazorTrivialJs.csproj" />
+    </ItemGroup>
 </Project>

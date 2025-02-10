@@ -1,3 +1,4 @@
+using BlazorTrivialJs;
 using Microsoft.Extensions.DependencyInjection;
 using MudComposite.Base;
 
@@ -7,6 +8,7 @@ public static class DependencyInjection
 {
     public static void AddMudComposite(this IServiceCollection services)
     {
-        services.AddScoped<MudViewModelItem>();
+        services.AddScoped<MudUtility>();
+        services.AddScoped<ITrivialJs, TrivialJs>();
     }
 }

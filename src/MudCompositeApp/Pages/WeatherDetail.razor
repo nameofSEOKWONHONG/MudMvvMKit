@@ -4,13 +4,13 @@
 @inherits MudComposite.ViewComponents.MudDetailViewComponent<int, WeatherForecast, MudCompositeApp.Composites.IWeatherDetailComposite>
 
 <MudContainer>
-    <MudForm Model="@ViewModel.RetrievedItem" @ref="@ViewModel.MudForm" Validation="@(_validator.ValidateValue)" ValidationDelay="0">
+    <MudForm Model="@ViewModel.RetrievedItem" @ref="@Form" Validation="@(_validator.ValidateValue)" ValidationDelay="0">
         <MudPaper>
             <MudText>@ViewModel.RetrievedItem.Id</MudText>
-            <MudNumericField Label="TemperatureC" @bind-Value="ViewModel.RetrievedItem.TemperatureC" For="@(() =>ViewModel.RetrievedItem.TemperatureC)" Immediate="true"/>
+            <MudNumericField T="int" Label="TemperatureC" @bind-Value="ViewModel.RetrievedItem.TemperatureC" For="@(() =>ViewModel.RetrievedItem.TemperatureC)" Immediate="true"/>
         </MudPaper>
     </MudForm>
-    <MudButton OnClick="this.ViewModel.Submit">Submit</MudButton>
+    <MudButton OnClick="this.Submit">Submit</MudButton>
     <MudButton OnClick="this.Cancel">Go Back</MudButton>
 </MudContainer>
 
@@ -29,7 +29,7 @@
     {
         if (firstRender)
         {
-            await this.ViewModel.Retrieve();
+            await this.ViewModel.OnRetrieve();
             await InvokeAsync(StateHasChanged);
         }
     }

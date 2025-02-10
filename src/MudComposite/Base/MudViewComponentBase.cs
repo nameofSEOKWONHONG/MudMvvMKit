@@ -1,20 +1,25 @@
 using System.ComponentModel;
+using BlazorTrivialJs;
 using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Services;
+using MudComposite.ViewComponents;
 
 namespace MudComposite.Base;
 
 public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsyncDisposable, IBrowserViewportObserver
 {
+    protected const int Delay = 500;
     [CascadingParameter] protected INotifyPropertyChanged AppState { get; set; }
     
     [Inject] public IDialogService DialogService { get; set; }
+    [Inject] public ISnackbar Snackbar { get; set; }
     [Inject] public IBrowserViewportService BrowserViewportService { get; set; } = null!;
     [Inject] public NavigationManager NavManager { get; set; } = null!;
     [Inject] protected IJSRuntime JSRuntime { get; set; }
+    [Inject] protected ITrivialJs TrivialJs { get; set; }
     
     protected Breakpoint ViewBreakpoint;
     protected List<Breakpoint> ViewBreakpoints = new();
@@ -84,17 +89,30 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
 
     protected virtual async Task Cancel()
     {
-        await JSRuntime.InvokeVoidAsync("window.history.back");
+        await TrivialJs.GoBack();
     }
 
     protected virtual async Task Forward()
     {
-        await JSRuntime.InvokeVoidAsync("window.history.forward");
+        await TrivialJs.GoForward();
     }
     
     private void AppStateOnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         StateHasChanged();
+    }
+    
+    protected async Task<IDialogReference> ShowProgressDialog()
+    {
+        var dlgOption = new DialogOptions()
+        {
+            CloseButton = false,
+            CloseOnEscapeKey = true,
+            BackdropClick = false,
+            Position = DialogPosition.Center,
+            NoHeader = true
+        };
+        return await this.DialogService.ShowAsync<ProgressDialog>(null, dlgOption);
     }
 
     public virtual void Dispose()
@@ -117,5 +135,41 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
         {
             AppState.PropertyChanged -= AppStateOnPropertyChanged;    
         }
+    }
+    
+    protected void NavigateToUrl(string url)
+    {
+        this.NavManager.NavigateTo(url);
+    }
+
+    protected void NavigateToUrlObject(string url, string serializeString)
+    {
+        //save model into local storage, after next page load model from local storage.
+        this.NavManager.NavigateTo(url, new NavigationOptions()
+        {
+            HistoryEntryState = serializeString
+        });
+    }
+    
+    protected T GetUrlObject<T>()
+    {
+        return this.NavManager.HistoryEntryState.xDeserialize<T>();
+    }
+}
+
+public abstract class MudViewComponentBase<TModel, TViewModel> : MudViewComponentBase
+where TModel : class, new()
+where TViewModel : IMudViewModelBase
+{
+    public TModel SelectedItem { get; set; } = new();
+    public TViewModel ViewModel { get; set; }
+    
+    public virtual async Task Click(string id, object item)
+    {
+        this.SelectedItem = (TModel)item;
+        
+        if (ViewModel.OnClick.xIsEmpty()) return;
+        
+        await ViewModel.OnClick(id, item);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using eXtensionSharp;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using MudComposite.Base;
 using MudComposite.ViewComponents.Composites.ListView;
@@ -18,8 +19,9 @@ public interface IWeatherListViewComposite : IMudDataGridViewModel<WeatherForeca
 public class WeatherDataGridComposite : MudDataGridViewModel<WeatherForecast, SearchModel>, IWeatherListViewComposite
 {
     private readonly IWeatherService _weatherService;
-    public WeatherDataGridComposite(MudViewModelItem mudViewModelItem,
-        IWeatherService weatherService) : base(mudViewModelItem)
+
+    public WeatherDataGridComposite(IWeatherService weatherService, MudUtility mudViewUtility)
+    : base(mudViewUtility)
     {
         _weatherService = weatherService;
     }
@@ -42,21 +44,10 @@ public class WeatherDataGridComposite : MudDataGridViewModel<WeatherForecast, Se
 
             if (key == "detail")
             {
-                this.Utility.NavigationManager.NavigateTo($"/weather/detail/{selectedItem.Id}");
+                this.MudUtility.NavigationManager.NavigateTo($"/weather/detail/{selectedItem.Id}");
             }
 
             return Task.CompletedTask;
         };
-    }
-
-
-    public override string RowStyleFunc(WeatherForecast item, int id)
-    {
-        return this.SelectedItem == item ? "background-color: #cff4ff;": string.Empty;
-    }
-
-    public override void GoDetail()
-    {
-        this.Utility.NavigationManager.NavigateTo($"/weather/detail/{this.SelectedItem.Id}");
     }
 }

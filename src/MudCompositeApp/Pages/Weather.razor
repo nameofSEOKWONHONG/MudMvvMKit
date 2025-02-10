@@ -13,11 +13,11 @@
 <MudDataGrid T="WeatherForecast"
              EditMode="DataGridEditMode.Form"
              Dense="true"
-             ServerData="ViewModel.ServerReload"
+             ServerData="ServerReload"
              Filterable="false"
              SortMode="SortMode.None"
-             RowStyleFunc="ViewModel.RowStyleFunc"
-             RowClick="ViewModel.DataGridRowClick"
+             RowStyleFunc="RowStyleFunc"
+             RowClick="DataGridRowClick"
              @ref="ViewModel.DataGrid">
     <Columns>
         <PropertyColumn Property="m => m.Date"/>
@@ -26,8 +26,8 @@
         <PropertyColumn Property="m => m.TemperatureF"/>
         <TemplateColumn>
             <CellTemplate>
-                <MudButton Variant="Variant.Filled" OnClick="@(() => ViewModel.Click("detail", context.Item))"></MudButton>
-                <MudButton Variant="Variant.Filled" OnClick="@(() => ViewModel.Remove(context.Item))">delete</MudButton>
+                <MudButton Variant="Variant.Filled" OnClick="@(() => Click("detail", context.Item))"></MudButton>
+                <MudButton Variant="Variant.Filled" OnClick="@(() => Remove(context.Item))">delete</MudButton>
             </CellTemplate>
         </TemplateColumn>
     </Columns>

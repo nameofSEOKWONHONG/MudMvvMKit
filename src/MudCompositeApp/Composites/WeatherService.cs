@@ -44,22 +44,24 @@ public class WeatherService : IWeatherService
 
     public async Task<Results<bool>> Modify(WeatherForecast item)
     {
-        var res = await _httpClient.PatchAsJsonAsync($"api/weather", item);
-        res.EnsureSuccessStatusCode();
-        return await res.Content.ReadFromJsonAsync<Results<bool>>();
+        // var res = await _httpClient.PatchAsJsonAsync($"api/weather", item);
+        // res.EnsureSuccessStatusCode();
+        // return await res.Content.ReadFromJsonAsync<Results<bool>>();
+        return await Results<bool>.SuccessAsync(true);
     }
 
     public async Task<Results<int>> Add(WeatherForecast item)
     {
-        var res = await _httpClient.PostAsJsonAsync($"api/weather", item);
-        res.EnsureSuccessStatusCode();
-        return await res.Content.ReadFromJsonAsync<Results<int>>();
+        // var res = await _httpClient.PostAsJsonAsync($"api/weather", item);
+        // res.EnsureSuccessStatusCode();
+        // return await res.Content.ReadFromJsonAsync<Results<int>>();
+        return await Results<int>.SuccessAsync(item.Id);
     }
 
     public async Task<Results<bool>> Remove(int id)
     {
-        var exists = _forecasts.First(m => m.Id == id);
-        _forecasts.Remove(exists);
+        // var exists = _forecasts.First(m => m.Id == id);
+        // _forecasts.Remove(exists);
         return await Results<bool>.SuccessAsync();
     }
 }

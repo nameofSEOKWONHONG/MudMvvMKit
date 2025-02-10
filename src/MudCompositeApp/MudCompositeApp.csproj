@@ -16,6 +16,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Reference Include="BlazorTrivialJs">
+        <HintPath>..\..\..\BlazorSecretManager\BlazorTrivialJs\bin\Debug\net9.0\BlazorTrivialJs.dll</HintPath>
+      </Reference>
       <Reference Include="Microsoft.AspNetCore.Components.Authorization">
         <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\9.0.0\Microsoft.AspNetCore.Components.Authorization.dll</HintPath>
       </Reference>

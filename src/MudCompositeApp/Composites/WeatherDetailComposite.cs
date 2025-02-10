@@ -1,6 +1,5 @@
 using eXtensionSharp;
 using FluentValidation;
-using MudComposite.Base;
 using MudComposite.ViewComponents.Composites.DetailView;
 
 namespace MudCompositeApp.Composites;
@@ -13,8 +12,7 @@ public interface IWeatherDetailComposite : IMudDetailViewModel<int, WeatherForec
 public class WeatherDetailComposite : MudDetailViewModel<int, WeatherForecast>, IWeatherDetailComposite
 {
     private readonly IWeatherService _weatherService;
-    public WeatherDetailComposite(MudViewModelItem mudViewModelItem,
-        IWeatherService weatherService) : base(mudViewModelItem)
+    public WeatherDetailComposite(IWeatherService weatherService)
     {
         _weatherService = weatherService;
     }
