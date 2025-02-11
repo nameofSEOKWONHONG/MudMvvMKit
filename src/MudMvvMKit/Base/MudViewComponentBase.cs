@@ -162,7 +162,8 @@ where TModel : class, new()
 where TViewModel : IMudViewModelBase
 {
     public TModel SelectedItem { get; set; } = new();
-    public TViewModel ViewModel { get; set; }
+    
+    [Inject] public TViewModel ViewModel { get; set; }
     
     public virtual async Task Click(string id, object item)
     {

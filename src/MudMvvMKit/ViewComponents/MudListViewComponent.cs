@@ -13,7 +13,6 @@ public abstract class MudListViewComponent<TModel, TSearchModel, TViewModel> : M
     where TSearchModel : class, new()
     where TModel : class, new()
 {
-    [Inject] protected TViewModel ViewModel { get; set; }
     protected MudDataGrid<TModel> DataGrid { get; set; }
 
     protected override void OnViewAfterRender(bool firstRender)
