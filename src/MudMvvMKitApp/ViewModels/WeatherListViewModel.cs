@@ -1,26 +1,25 @@
 ﻿using eXtensionSharp;
-using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using MudComposite.Base;
-using MudComposite.ViewComponents.Composites.ListView;
+using MudMvvMKit.Base;
+using MudMvvMKit.ViewComponents.ViewModels.ListView;
 
-namespace MudCompositeApp.Composites;
+namespace MudMvvMKitApp.ViewModels;
 
 public class SearchModel
 {
     public string City { get; set; }
 }
 
-public interface IWeatherListViewComposite : IMudDataGridViewModel<WeatherForecast, SearchModel>
+public interface IWeatherListViewComposite : IMudListViewModel<WeatherForecast, SearchModel>
 {
     
 }
 
-public class WeatherDataGridComposite : MudDataGridViewModel<WeatherForecast, SearchModel>, IWeatherListViewComposite
+public class WeatherListViewModel : MudListViewModel<WeatherForecast, SearchModel>, IWeatherListViewComposite
 {
     private readonly IWeatherService _weatherService;
 
-    public WeatherDataGridComposite(IWeatherService weatherService, MudUtility mudViewUtility)
+    public WeatherListViewModel(IWeatherService weatherService, MudUtility mudViewUtility)
     : base(mudViewUtility)
     {
         _weatherService = weatherService;

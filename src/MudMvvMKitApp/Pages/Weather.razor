@@ -1,8 +1,7 @@
 ﻿@page "/weather"
 
-@using MudCompositeApp.Composites
-
-@inherits MudComposite.ViewComponents.MudListViewComponent<WeatherForecast, SearchModel, IWeatherListViewComposite>
+@using MudMvvMKitApp.ViewModels
+@inherits MudMvvMKit.ViewComponents.MudListViewComponent<MudMvvMKitApp.ViewModels.WeatherForecast, MudMvvMKitApp.ViewModels.SearchModel, MudMvvMKitApp.ViewModels.IWeatherListViewComposite>
 
 <PageTitle>Weather</PageTitle>
 

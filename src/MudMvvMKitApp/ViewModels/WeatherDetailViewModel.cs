@@ -1,18 +1,18 @@
 using eXtensionSharp;
 using FluentValidation;
-using MudComposite.ViewComponents.Composites.DetailView;
+using MudMvvMKit.ViewComponents.ViewModels.DetailView;
 
-namespace MudCompositeApp.Composites;
+namespace MudMvvMKitApp.ViewModels;
 
-public interface IWeatherDetailComposite : IMudDetailViewModel<int, WeatherForecast>
+public interface IWeatherDetailViewModel : IMudDetailViewModel<int, WeatherForecast>
 {
     void Initialize();
 }
 
-public class WeatherDetailComposite : MudDetailViewModel<int, WeatherForecast>, IWeatherDetailComposite
+public class WeatherDetailViewModel : MudDetailViewModel<int, WeatherForecast>, IWeatherDetailViewModel
 {
     private readonly IWeatherService _weatherService;
-    public WeatherDetailComposite(IWeatherService weatherService)
+    public WeatherDetailViewModel(IWeatherService weatherService)
     {
         _weatherService = weatherService;
     }

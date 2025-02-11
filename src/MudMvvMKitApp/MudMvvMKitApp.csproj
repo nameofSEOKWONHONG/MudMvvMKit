@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MudComposite\MudComposite.csproj" />
+      <ProjectReference Include="..\MudMvvMKit\MudMvvMKit.csproj" />
     </ItemGroup>
 
     <ItemGroup>

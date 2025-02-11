@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
 using eXtensionSharp;
-using MudComposite;
+using MudMvvMKit;
 
-namespace MudCompositeApp.Composites;
+namespace MudMvvMKitApp.ViewModels;
 
 public interface IWeatherService
 {

@@ -2,17 +2,17 @@ using BlazorTrivialJs;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
-using MudComposite.Base;
-using MudCompositeApp;
-using MudCompositeApp.Composites;
+using MudMvvMKit.Base;
+using MudMvvMKitApp;
+using MudMvvMKitApp.ViewModels;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMudServices();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
-builder.Services.AddScoped<IWeatherListViewComposite, WeatherDataGridComposite>();
-builder.Services.AddScoped<IWeatherDetailComposite, WeatherDetailComposite>();
+builder.Services.AddScoped<IWeatherListViewComposite, WeatherListViewModel>();
+builder.Services.AddScoped<IWeatherDetailViewModel, WeatherDetailViewModel>();
 builder.Services.AddScoped<MudUtility>();
 builder.Services.AddTrivialJs();
 
