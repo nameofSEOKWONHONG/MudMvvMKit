@@ -9,7 +9,7 @@ using MudComposite.ViewComponents.Composites.ListView;
 namespace MudComposite.ViewComponents;
 
 public abstract class MudListViewComponent<TModel, TSearchModel, TViewModel> : MudViewComponentBase<TModel, TViewModel>
-    where TViewModel : IMudDataGridViewModel<TModel, TSearchModel>
+    where TViewModel : IMudListViewModel<TModel, TSearchModel>
     where TSearchModel : class, new()
     where TModel : class, new()
 {

@@ -173,3 +173,18 @@ where TViewModel : IMudViewModelBase
         await ViewModel.OnClick(id, item);
     }
 }
+
+/*
+ * MudComponentBase
+ *        -> MudViewComponentBase
+ *                   -> MudViewComponentBase<TModel, TViewModel>
+ *                             -> MudListViewComponent
+ *                             -> MudDetailViewComponent
+ *
+ * View -> ListView <- MudListViewComponent
+ *      -> DetailView <- MudDetailViewComponent
+ *      -> NoStateView <- MudViewComponentBase, MudViewComponentBase<TModel, TViewModel>
+ *
+ * ListView <- MudListViewModel
+ * DetailView <- MudDetailViewModel
+*/

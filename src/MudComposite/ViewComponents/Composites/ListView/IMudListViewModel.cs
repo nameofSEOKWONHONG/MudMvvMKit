@@ -4,7 +4,7 @@ using MudComposite.Base;
 
 namespace MudComposite.ViewComponents.Composites.ListView;
 
-public interface IMudDataGridViewModel<TModel, TSearchModel> : IMudViewModelBase
+public interface IMudListViewModel<TModel, TSearchModel> : IMudViewModelBase
     where TModel : class, new()
 {
     #region [property]
