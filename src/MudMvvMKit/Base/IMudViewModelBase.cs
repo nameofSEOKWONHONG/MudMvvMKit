@@ -1,4 +1,4 @@
-namespace MudComposite.Base;
+namespace MudMvvMKit.Base;
 
 public interface IMudViewModelBase
 {

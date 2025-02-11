@@ -2,7 +2,7 @@ using BlazorTrivialJs;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace MudComposite.Base;
+namespace MudMvvMKit.Base;
 
 public class MudUtility
 {

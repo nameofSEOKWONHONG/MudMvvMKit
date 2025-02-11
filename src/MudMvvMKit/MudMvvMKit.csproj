@@ -7,17 +7,17 @@
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 
         <Copyright>MIT</Copyright>
-        <Product>MudComposite</Product>
+        <Product>MudMvvMKit</Product>
         <Company>seokwon hong</Company>
         <Version>0.0.1</Version>
         <FileVersion>0.0.1</FileVersion>
         <Title>MudComposite</Title>
-        <Description>Basic Screen Functionality Setup Using MudBlazor</Description>
-        <PackageProjectUrl>https://github.com/nameofSEOKWONHONG/MudComposite</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/nameofSEOKWONHONG/MudComposite</RepositoryUrl>
+        <Description>MudMvvMKit is a Blazor-based MVVM (Model-View-ViewModel) component framework built on top of MudBlazor. It provides a structured and scalable way to implement MVVM patterns in Blazor applications, enhancing UI flexibility, maintainability, and modularity.</Description>
+        <PackageProjectUrl>https://github.com/nameofSEOKWONHONG/MudMvvMKit</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/nameofSEOKWONHONG/MudMvvMKit</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageTags>mudblazor, view, composite</PackageTags>
+        <PackageTags>mudblazor, view, mvvm</PackageTags>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="eXtensionSharp" Version="1.0.2" />
@@ -26,6 +26,9 @@
     </ItemGroup>
     <ItemGroup>
       <Content Remove="C:\Users\seokwon\.nuget\packages\extensionsharp\1.0.2\contentFiles\any\net9.0\README.md" />
+      <Content Include="..\..\README.KR.md">
+        <Link>README.KR.md</Link>
+      </Content>
     </ItemGroup>
     <ItemGroup>
         <None Include="..\..\README.md" Pack="true" PackagePath="\"/>

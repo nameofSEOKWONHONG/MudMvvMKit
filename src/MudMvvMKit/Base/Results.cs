@@ -1,4 +1,4 @@
-﻿namespace MudComposite;
+﻿namespace MudMvvMKit;
 
 public class Results
 {

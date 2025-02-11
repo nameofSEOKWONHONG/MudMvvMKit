@@ -1,7 +1,6 @@
-﻿using MudBlazor;
-using MudComposite.Base;
+﻿using MudMvvMKit.Base;
 
-namespace MudComposite.ViewComponents.Composites.DetailView;
+namespace MudMvvMKit.ViewComponents.ViewModels.DetailView;
 
 public interface IMudDetailViewModel<TParameter, TModel>: IMudViewModelBase
 {

@@ -1,10 +1,10 @@
 ﻿using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using MudComposite.Base;
-using MudComposite.ViewComponents.Composites.DetailView;
+using MudMvvMKit.Base;
+using MudMvvMKit.ViewComponents.ViewModels.DetailView;
 
-namespace MudComposite.ViewComponents;
+namespace MudMvvMKit.ViewComponents;
 
 public abstract class MudDetailViewComponent<TParameter, TModel, TViewModel> : MudViewComponentBase<TModel, TViewModel>
     where TModel : class, new()

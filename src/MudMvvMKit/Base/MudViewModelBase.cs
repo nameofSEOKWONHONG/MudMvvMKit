@@ -1,8 +1,8 @@
 ﻿using eXtensionSharp;
 using MudBlazor;
-using MudComposite.ViewComponents;
+using MudMvvMKit.ViewComponents;
 
-namespace MudComposite.Base;
+namespace MudMvvMKit.Base;
 
 public abstract class MudViewModelBase : IMudViewModelBase
 {

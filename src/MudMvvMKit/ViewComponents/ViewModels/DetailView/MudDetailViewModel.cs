@@ -1,10 +1,6 @@
-﻿using eXtensionSharp;
-using FluentValidation;
-using MudBlazor;
-using MudComposite.Base;
-using Severity = MudBlazor.Severity;
+﻿using MudMvvMKit.Base;
 
-namespace MudComposite.ViewComponents.Composites.DetailView;
+namespace MudMvvMKit.ViewComponents.ViewModels.DetailView;
 
 public abstract class MudDetailViewModel<TParameter, TModel> : MudViewModelBase, IMudDetailViewModel<TParameter, TModel>
     where TModel : class, new()

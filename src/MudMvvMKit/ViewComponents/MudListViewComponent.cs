@@ -3,10 +3,10 @@ using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
-using MudComposite.Base;
-using MudComposite.ViewComponents.Composites.ListView;
+using MudMvvMKit.Base;
+using MudMvvMKit.ViewComponents.ViewModels.ListView;
 
-namespace MudComposite.ViewComponents;
+namespace MudMvvMKit.ViewComponents;
 
 public abstract class MudListViewComponent<TModel, TSearchModel, TViewModel> : MudViewComponentBase<TModel, TViewModel>
     where TViewModel : IMudListViewModel<TModel, TSearchModel>

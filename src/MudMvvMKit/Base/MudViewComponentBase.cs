@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Services;
-using MudComposite.ViewComponents;
+using MudMvvMKit.ViewComponents;
 
-namespace MudComposite.Base;
+namespace MudMvvMKit.Base;
 
 public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsyncDisposable, IBrowserViewportObserver
 {

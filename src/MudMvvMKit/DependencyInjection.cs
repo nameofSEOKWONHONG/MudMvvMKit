@@ -1,8 +1,8 @@
 using BlazorTrivialJs;
 using Microsoft.Extensions.DependencyInjection;
-using MudComposite.Base;
+using MudMvvMKit.Base;
 
-namespace MudComposite;
+namespace MudMvvMKit;
 
 public static class DependencyInjection
 {

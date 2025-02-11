@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using MudBlazor;
-using MudComposite.Base;
+﻿using MudBlazor;
+using MudMvvMKit.Base;
 
-namespace MudComposite.ViewComponents.Composites.ListView;
+namespace MudMvvMKit.ViewComponents.ViewModels.ListView;
 
 public interface IMudListViewModel<TModel, TSearchModel> : IMudViewModelBase
     where TModel : class, new()
