@@ -1,4 +1,5 @@
-﻿using MudMvvMKit.Base;
+﻿using FluentValidation;
+using MudMvvMKit.Base;
 
 namespace MudMvvMKit.ViewComponents.ViewModels.DetailView;
 
@@ -13,4 +14,9 @@ public interface IMudDetailViewModel<TParameter, TModel>: IMudViewModelBase
     Func<Task<Results>> OnRetrieve { get; set; }    
 
     #endregion
+}
+
+public interface IFormValidator
+{
+    Task<IEnumerable<string>> ValidateValue(object model, string propertyName);
 }

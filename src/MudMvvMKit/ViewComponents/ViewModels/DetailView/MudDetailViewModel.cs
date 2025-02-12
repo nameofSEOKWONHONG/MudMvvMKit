@@ -1,4 +1,5 @@
-﻿using MudMvvMKit.Base;
+﻿using FluentValidation;
+using MudMvvMKit.Base;
 
 namespace MudMvvMKit.ViewComponents.ViewModels.DetailView;
 

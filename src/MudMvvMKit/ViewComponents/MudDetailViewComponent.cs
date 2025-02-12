@@ -1,8 +1,10 @@
 ﻿using eXtensionSharp;
+using FluentValidation;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using MudMvvMKit.Base;
 using MudMvvMKit.ViewComponents.ViewModels.DetailView;
+using Severity = MudBlazor.Severity;
 
 namespace MudMvvMKit.ViewComponents;
 
@@ -13,6 +15,13 @@ public abstract class MudDetailViewComponent<TParameter, TModel, TViewModel> : M
     [Inject] protected TViewModel ViewModel { get; set; }
     protected MudForm Form { get; set; }
     
+    public IFormValidator FormValidator { get; set; }
+
+    protected override void OnViewInitialized()
+    {
+        
+    }
+
     public virtual async Task Retrieve()
     {
         if(ViewModel.OnRetrieve.xIsEmpty()) return;
