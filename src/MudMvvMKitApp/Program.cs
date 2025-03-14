@@ -1,4 +1,3 @@
-using BlazorTrivialJs;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
@@ -14,7 +13,6 @@ builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<IWeatherListViewComposite, WeatherListViewModel>();
 builder.Services.AddScoped<IWeatherDetailViewModel, WeatherDetailViewModel>();
 builder.Services.AddScoped<MudUtility>();
-builder.Services.AddTrivialJs();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

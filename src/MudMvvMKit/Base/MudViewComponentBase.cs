@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using BlazorTrivialJs;
 using eXtensionSharp;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -19,7 +18,6 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
     [Inject] public IBrowserViewportService BrowserViewportService { get; set; } = null!;
     [Inject] public NavigationManager NavManager { get; set; } = null!;
     [Inject] protected IJSRuntime JSRuntime { get; set; }
-    [Inject] protected ITrivialJs TrivialJs { get; set; }
     
     protected Breakpoint ViewBreakpoint;
     protected List<Breakpoint> ViewBreakpoints = new();
@@ -87,14 +85,14 @@ public abstract class MudViewComponentBase : MudComponentBase, IDisposable, IAsy
         return InvokeAsync(StateHasChanged);
     }
 
-    protected virtual async Task Cancel()
+    protected virtual async Task HistoryBack()
     {
-        await TrivialJs.GoBack();
+        await JSRuntime.InvokeVoidAsync("window.history.back");
     }
 
-    protected virtual async Task Forward()
+    protected virtual async Task HistoryForward()
     {
-        await TrivialJs.GoForward();
+        await JSRuntime.InvokeVoidAsync("window.history.forward");
     }
     
     private void AppStateOnPropertyChanged(object sender, PropertyChangedEventArgs e)

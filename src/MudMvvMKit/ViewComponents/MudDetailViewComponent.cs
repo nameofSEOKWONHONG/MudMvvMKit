@@ -1,5 +1,4 @@
 ﻿using eXtensionSharp;
-using FluentValidation;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using MudMvvMKit.Base;
@@ -56,6 +55,6 @@ public abstract class MudDetailViewComponent<TParameter, TModel, TViewModel> : M
         this.Snackbar.Add(result.Messages.xJoin(), result.Succeeded ? Severity.Success : Severity.Error);
         await Task.Delay(Delay);
 
-        await TrivialJs.GoBack();
+        await this.HistoryBack();
     }
 }
